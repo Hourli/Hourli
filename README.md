@@ -3,7 +3,9 @@
 ###WIP
 
 An app for independent contractors or anyone that charges an hourly fee for their services.
+
 Users can create jobs, create tasks for each job and record how long they worked on each task, what it involved, etc.
+
 Once the job is complete, the user will be able to create an invoice and send it to the customer.
 
 This app will make the lives easier of many, even private cleaning staff.
