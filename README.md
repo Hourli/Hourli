@@ -1,4 +1,4 @@
-# Hourli
+# Hourli [![Build Status](https://travis-ci.org/Hourli/Hourli.svg?branch=master)](https://travis-ci.org/Hourli/Hourli)
 
 ###WIP
 

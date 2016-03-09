@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -35,6 +35,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -45,7 +50,7 @@ group :development do
   gem 'spring'
 end
 
-group :production do 
-  
+group :production do
+  # @TODO add in gems for heroku deployment, also Procfile
 end
 
