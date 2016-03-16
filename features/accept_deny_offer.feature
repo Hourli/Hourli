@@ -6,13 +6,15 @@ and I can Accept or Deny offers.
 
 Background: a job request has been made and several contractors have submitted offers
 
-	Given the following request exists:
-	request1
+	Given the following requests exist:
+	|name|
+	|request1|
 
 	And the following offers for that request exist:
-	offer1
-	offer2
-	offer3
+	|name|
+	|offer1|
+	|offer2|
+	|offer3|
 
 Scenario: Accepting a request
 	When I click accept on offer3
