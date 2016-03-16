@@ -23,6 +23,7 @@ test: &test
 production:
   adapter: postgresql
   encoding: unicode
+  database: hourli_prod_db
   pool: 5
 
 cucumber:
