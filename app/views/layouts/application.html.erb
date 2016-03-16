@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-      <%= yield :title %>
-      <%= content_for :title do %>
-          Hourli
-      <% end %>
-    </title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    <% if content_for? :title %>
+        <%= yield :title %>
+    <% else %>
+        Hourli
+    <% end %>
+  </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-    <%= render 'partials/navbar' %>
+<body>
+<%= render 'partials/navbar' %>
 
-    <%= yield %>
+<%= yield %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  </body>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</body>
 
 </html>
