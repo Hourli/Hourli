@@ -56,6 +56,7 @@ group :development do
 end
 
 group :production do
-  # @TODO add in gems for heroku deployment, also Procfile
+  gem 'puma'
+  gem 'rails_12factor'
 end
 
