@@ -27,6 +27,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'font-awesome-sass', '~> 4.5.0'
 
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -47,6 +49,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'simplecov', :require => false
+  gem 'mailcatcher'
 end
 
 group :development do
