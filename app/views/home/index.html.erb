@@ -1,1 +1,14 @@
-Hey!
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br><br><br>
+      <div class="text-center">
+        <% if user_signed_in? %>
+            <h2 class="text-center">Welcome <%= current_user.email %>!</h2>
+        <% else %>
+            <h2 class="text-center"><%= link_to "Signup", new_user_registration_path, class: "btn btn-primary" %></h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.list-group-item{
+  margin: 4px 0px;
+}
+
+.noty_type_notice{
+  @extend .alert-info;
+}
+
+.noty_type_alert{
+  @extend .alert-danger;
+}
