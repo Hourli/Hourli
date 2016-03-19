@@ -20,7 +20,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-user"></i>
                     </div>
-                    <%= email_field_tag :email, nil, class: "form-control input-sm", name: "user[email]", id: "user_email", placeholder: "Email", validate:true, required:true %>
+                    <%= email_field_tag :email, nil, class: "form-control input-sm", name: "user[email]", id: "user_email_navbar", placeholder: "Email", validate:true, required:true %>
                   </div>
                 </div>
                 <div class="form-group">
@@ -28,10 +28,10 @@
                     <div class="input-group-addon">
                       <i class="fa fa-lock"></i>
                     </div>
-                    <%= password_field_tag :password, nil, class: "form-control input-sm", name: "user[password]", id: "user_password", placeholder: "Password", validate:true, required:true %>
+                    <%= password_field_tag :password, nil, class: "form-control input-sm", name: "user[password]", id: "user_password_navbar", placeholder: "Password", validate:true, required:true %>
                   </div>
                 </div>
-                <%= submit_tag "Login", class: "btn btn-default btn-sm" %>
+                <%= submit_tag "Login", id: "login_navbar", class: "btn btn-default btn-sm" %>
             <% end %>
       <% else %>
             <li class="dropdown">
