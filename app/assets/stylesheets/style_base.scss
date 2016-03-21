@@ -1,0 +1,38 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+}
+
+.breadcrumb-footer{
+  margin: 0 auto;
+}
+
+#noty_topRight_layout_container {
+  .list-group-item {
+    margin: 4px 0px;
+  }
+}
+
+.noty_type_notice{
+  @extend .alert-info;
+}
+
+.noty_type_alert{
+  @extend .alert-danger;
+}
+
+.text-small{
+  font-size: 13px;
+}
