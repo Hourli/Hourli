@@ -1,6 +1,7 @@
 # Hourli
 
 Dev: [![Build Status](https://travis-ci.org/Hourli/Hourli.svg?branch=dev)](https://travis-ci.org/Hourli/Hourli)
+
 Prod: [![Build Status](https://travis-ci.org/Hourli/Hourli.svg?branch=master)](https://travis-ci.org/Hourli/Hourli)
 
 Check out http://www.agileventures.org/projects/hourli for more details
