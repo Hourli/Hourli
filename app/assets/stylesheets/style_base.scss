@@ -5,6 +5,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -18,8 +19,10 @@ body {
   margin: 0 auto;
 }
 
-.list-group-item{
-  margin: 4px 0px;
+#noty_topRight_layout_container {
+  .list-group-item {
+    margin: 4px 0px;
+  }
 }
 
 .noty_type_notice{
@@ -28,4 +31,8 @@ body {
 
 .noty_type_alert{
   @extend .alert-danger;
+}
+
+.text-small{
+  font-size: 13px;
 }
