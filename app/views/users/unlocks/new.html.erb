@@ -1,16 +1,16 @@
-<h2>Resend unlock instructions</h2>
-
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br>
+      <h2 class="text-center">Resend unlock instructions</h2>
+      <br>
+      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+          <%= f.email_field :email, autofocus: true %>
+          <%= f.submit "Resend unlock instructions", class: "btn btn-primary" %>
+      <% end %>
+      <br>
+      <%= render "users/shared/links" %>
+    </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>

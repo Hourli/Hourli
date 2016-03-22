@@ -1,26 +1,25 @@
-<h2>Login</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br>
+      <h2 class="text-center">Login</h2>
+      <br>
+      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+          <%= f.email_field :email, autofocus: true, required: true, validate: true %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+          <%= f.password_field :password, autocomplete: "off", required: true, validate: true%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          <% if devise_mapping.rememberable? -%>
+              <%= f.check_box :remember_me %>
+          <% end -%>
+
+          <%= f.submit "Login", class: "btn btn-primary", id: "login_main" %>
+      <% end %>
+
+      <br>
+      <%= render "users/shared/links" %>
+
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Login", id: "login_main" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
