@@ -4,13 +4,12 @@ module NavigationHelpers
 		case page_name
 		when "home"
 			root_path
-
 		when "contact us"
 			contact_path
-
-
 		when "about us"
 			about_us_path
+		when "sign up"
+			new_user_registration_path
 		end
 	end
 end
