@@ -1,6 +1,6 @@
 <footer class="footer">
     <ol class="breadcrumb breadcrumb-footer text-center">
-      <li <% if action_name == "about" %>class="active"<% end %>><% if action_name == "about" %>About<% else %><a href="#">About</a><% end %></li>
-      <li <% if action_name == "contact" %>class="active"<% end %>><% if action_name == "contact" %>Contact<% else %><a href="#">Contact</a><% end %></li>
+      <li <% if action_name == "about" %>class="active"<% end %>><% if action_name == "about" %>About<% else %><a id="about_us" href="<%=about_us_path%>">About</a><% end %></li>
+      <li <% if action_name == "contact" %>class="active"<% end %>><% if action_name == "contact" %>Contact<% else %><a id="contact_us" href="<%= contact_path %>">Contact</a><% end %></li>
     </ol>
 </footer>
