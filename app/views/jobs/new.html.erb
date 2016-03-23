@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
 
-        <h1>New Job</h1>
+        <h1>Create job</h1>
 
 
-<%= bootstrap_form_for(@job) do |f| %>
+<%= bootstrap_form_for(@job, label_errors: true, url: jobs_path, method: :post) do |f| %>
   <%= f.text_field :name %>
   <%= f.text_area :description %>
   <%= f.text_field :location %>

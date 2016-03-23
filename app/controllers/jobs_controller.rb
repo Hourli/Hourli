@@ -5,12 +5,15 @@ class JobsController < ApplicationController
     end
     
     def create
-        
-        if Job.create!(job_params).valid?
-            @job = Job.create!(job_params)
+        @job = Job.create(job_params)
+        if @job.valid?
             flash[:notice] = "#{@job.name} was successfully created."
             redirect_to @job
-        end    
+        else
+            #puts @job.errors.full_messages
+            #redirect_to new_job_path(@job)
+            render :new
+        end
     end
     
     def show
