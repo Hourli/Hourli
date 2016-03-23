@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/about-us', to: 'home#about'
   
   resources :jobs
+  resources :job_requests
   
   
   # Example of regular route:
