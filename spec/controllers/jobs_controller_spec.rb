@@ -15,6 +15,13 @@ RSpec.describe JobsController, type: :controller do
         expect(flash[:notice]).to eq("#{job_name} was successfully created.")
         expect(response).to redirect_to(assigns[:job])
       end
+      it "shouldn't create a new job in the database, and errors for blank fields should be displayed" do
+           post :create, :job => {:name => '', :description => '', :location => "", :start_date=> '', :end_date => ''}
+          errorArray = ["Name can't be blank", "Description can't be blank", "Location can't be blank", "Start date can't be blank", "End date can't be blank"]
+          expect(assigns[:job].valid?).to eq(false)
+          expect(assigns[:job].errors.full_messages).to match_array(errorArray)
+          expect(response).to render_template(:new)
+      end  
   end
   
   describe "GET #show" do
