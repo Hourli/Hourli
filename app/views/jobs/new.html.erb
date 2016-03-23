@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+
+        <h1>New Job</h1>
+
+
+<%= bootstrap_form_for(@job) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_area :description %>
+  <%= f.text_field :location %>
+  <%= f.date_field :start_date %>
+  <%= f.date_field :end_date %>
+  <%= f.submit "Create", id: "createjob", class: "btn btn-primary" %>
+<% end %>
+
+</div>
+</div>
+</div>
