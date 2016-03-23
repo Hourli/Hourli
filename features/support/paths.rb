@@ -7,7 +7,12 @@ module NavigationHelpers
 
 		when "contact us"
 			contact_path
-
+			
+		when "New Job"
+			new_job_path
+		
+		when "create job"
+			job_path
 
 		when "about us"
 			about_us_path
