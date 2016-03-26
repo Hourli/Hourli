@@ -1,5 +1,5 @@
 def create_unconfirmed_user_account
-  @user = User.create!(email: "testing@hourli.com", password: "testing123")
+  @user = FactoryGirl.create(:user)
 end
 
 def create_confirmed_user_account
