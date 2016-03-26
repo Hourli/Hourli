@@ -11,7 +11,7 @@
           <%= f.email_field :email%>
           <%= f.password_field :password, autocomplete: "off", help: "(8 characters mininum)" %>
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          <%= f.submit "Sign up", class: "btn btn-primary" %>
+          <%= f.submit "Sign up", class: "btn btn-primary", id: "user_sign_up_btn" %>
       <% end %>
       <br>
       <%= render "users/shared/links" %>

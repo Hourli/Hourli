@@ -12,12 +12,14 @@ module NavigationHelpers
 		
 		when "create job"
 			job_path
-
-
 		when "about us"
 			about_us_path
 		when "sign up"
 			new_user_registration_path
+		when "customer_dashboard"
+			customers_path
+		when "contractor_dashboard"
+			contractors_path
 		end
 	end
 end
