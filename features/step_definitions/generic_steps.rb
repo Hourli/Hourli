@@ -17,3 +17,12 @@ end
 Then(/^I am on the "([^"]*)" page$/) do |page|
 	expect(current_path).to eq(path_to(page))
 end
+
+When (/^I fill in "([^"]*)" with "([^"]*)"$/) do |a1,a2|
+	fill_in(a1, with: a2)
+	
+end
+
+When /^(?:|I )press "([^"]*)"$/ do |button|
+  click_button(button)
+end

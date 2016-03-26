@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/contact', to: 'home#contact'
   get '/about-us', to: 'home#about'
+  
+  resources :jobs
+  resources :job_requests
+  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
