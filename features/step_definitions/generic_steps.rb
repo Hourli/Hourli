@@ -26,3 +26,7 @@ end
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
+
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |arg1, arg2|
+  select(arg1, from: arg2)
+end

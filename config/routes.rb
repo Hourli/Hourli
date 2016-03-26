@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   
   resources :jobs
   resources :job_requests
+  resources :customers
+  resources :contractors
+  
   
   
   # Example of regular route:
