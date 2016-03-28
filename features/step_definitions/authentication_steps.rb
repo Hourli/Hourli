@@ -1,20 +1,19 @@
-def create_unconfirmed_user_account
-  @user = FactoryGirl.create(:user)
+def create_unconfirmed_user_account(role='customer')
+  @user = FactoryGirl.create(:user, role: role)
 end
 
-def create_confirmed_user_account
-  create_unconfirmed_user_account
+def create_confirmed_user_account(role='customer')
+  create_unconfirmed_user_account(role)
   confirm_user_account
 end
 
 def confirm_user_account
-  confirmation_email =  ActionMailer::Base.deliveries.last
-  confirmation_link = confirmation_email.body.raw_source.scan(/href="([^"]*)"/).join("")
-  visit(confirmation_link)
+  # confirmation_email =  ActionMailer::Base.deliveries.last
+  # confirmation_link = confirmation_email.body.raw_source.scan(/href="([^"]*)"/).join("")
+  # visit(confirmation_link)
 
-  # Another way to confirm an account
-  # @user.confirmed_at = Time.now
-  # @user.save!
+  @user.confirmed_at = Time.now
+  @user.save!
 
 end
 
@@ -40,7 +39,7 @@ Given(/^I am logged in$/)do
   login
 end
 
-Given(/^I login with valid credentials/) do
+Given(/^I login with valid credentials$/) do
   login
 end
 
@@ -62,8 +61,8 @@ When(/^I logout$/) do
   logout
 end
 
-Given(/^I have a confirmed account$/) do
-  create_confirmed_user_account
+Given(/^I have a confirmed "([^"]*)" account$/) do |role|
+  create_confirmed_user_account(role)
 end
 
 Given(/^I have an unconfirmed account$/) do

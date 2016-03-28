@@ -51,6 +51,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'simplecov', :require => false
   gem 'mailcatcher'
+  gem 'selenium-webdriver'
 end
 
 group :development do
