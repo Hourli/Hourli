@@ -1,5 +1,5 @@
 Given(/^An? "([^"]*)" flash message exists$/) do |msg_type|
-  step %Q{I have a confirmed account}
+  step %Q{I have a confirmed "customer" account}
   if msg_type == "alert"
     step %Q{I login with an invalid "email"}
   else
