@@ -78,3 +78,8 @@ end
 Then(/^I should not be logged in$/) do
   expect(page.body).not_to have_content("Logout")
 end
+
+Then(/^I should be both a customer and a contractor$/) do
+  expect(@user.contractor).not_to be_nil
+  expect(@user.customer).not_to be_nil
+end

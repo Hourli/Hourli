@@ -26,8 +26,12 @@ When (/^I fill in "([^"]*)" with "([^"]*)"$/) do |a1,a2|
 	fill_in(a1, with: a2)
 end
 
-When /^(?:|I )press "([^"]*)"$/ do |button|
+When (/^(?:|I )press "([^"]*)"$/) do |button|
 	click_on(button)
+end
+
+Then (/^I should see a "([^"]*)" button$/) do |button|
+	expect(page.body).to have_button(button)
 end
 
 When(/^I select "([^"]*)" from "([^"]*)"$/) do |arg1, arg2|
