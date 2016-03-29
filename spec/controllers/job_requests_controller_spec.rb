@@ -24,6 +24,11 @@ render_views
  			response.should redirect_to job_request_path(JobRequest.find_by_title(@job_request_attributes[:title]))
  		end
 
+ 		it "should have a customer associated with it" do
+ 			expect(JobRequest.find_by_title(@job_request_attributes[:title]).customer_id).not_to be_nil
+ 			#puts JobRequest.find_by_title(@job_request_attributes[:title]).customer_id
+ 		end
+
  end
  end
 end
