@@ -9,7 +9,10 @@ module NavigationHelpers
 			
 		when "New Job"
 			new_job_path
-		
+		when "new job request"
+			new_job_request_path
+		when "job request"
+			job_request_path
 		when "create job"
 			job_path
 		when "about us"

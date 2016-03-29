@@ -7,11 +7,15 @@ def create
 	@job_request=JobRequest.create(job_request_params)
 	if @job_request.valid?
 		flash[:notice] = "A new job request was successfully created"
+		puts current_user.customer
+		@job_request.customer=current_user.customer
+		@job_request.save
 		redirect_to @job_request
 	else
 		#flash[:notice] = "Fail to create a job request: missing fields"
-		puts @job_request.errors.full_messages
 		render :new
+		puts @job_request.errors.full_messages
+		
 	end
 
 end

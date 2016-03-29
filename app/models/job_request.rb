@@ -6,5 +6,6 @@ class JobRequest < ActiveRecord::Base
 	validates :hourly_rate, :presence => true
 	validates :categories, :presence => true
 
+	belongs_to :customer
 	
 end
