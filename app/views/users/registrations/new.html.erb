@@ -5,10 +5,13 @@
       <h2 class="text-center">Signup</h2>
       <br>
       <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.email_field :email, autofocus: true %>
+          <%= f.text_field :first_name, autofocus: true %>
+          <%= f.text_field :last_name %>
+          <%= f.select :role, [["------------", ""], ["Customer", "customer"], ["Contractor", "contractor"], ["Both", "both"]]%>
+          <%= f.email_field :email%>
           <%= f.password_field :password, autocomplete: "off", help: "(8 characters mininum)" %>
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          <%= f.submit "Sign up", class: "btn btn-primary" %>
+          <%= f.submit "Sign up", class: "btn btn-primary", id: "user_sign_up_btn" %>
       <% end %>
       <br>
       <%= render "users/shared/links" %>
