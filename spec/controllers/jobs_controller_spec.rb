@@ -1,6 +1,8 @@
 require 'rails_helper'
 
+
 RSpec.describe JobsController, type: :controller do
+  render_views
     before(:each) do
         @user = FactoryGirl.create(:user)
         @user.confirmed_at = Time.now
@@ -8,6 +10,25 @@ RSpec.describe JobsController, type: :controller do
         sign_in :user, @user
         
     end
+    
+    describe "GET #index" do
+      
+     before(:each) do
+       job_1_attrs = FactoryGirl.attributes_for :job
+      
+       job_1_attrs["name"] = 'Electric - Martino Way'
+       job_1_attrs["description"] = 'Replace ceiling fans in bedrooms'
+       job_1_attrs["location"] = '16 Martino Way, Pomona NY, 10970'
+       job_1_attrs["start_date"] = '2015-05-05'
+       job_1_attrs["end_date"] = '2015-05-10'
+       @job_1 = FactoryGirl.create(:job, job_1_attrs)
+       get :index
+     end
+      it "should create a job and show it in the @jobs array" do
+       expect(assigns[:jobs]).to match_array([@job_1])
+      end
+    end
+    
      describe "POST #create" do
       it "should create a new job in the database, display a flash message, and redirect to the created job" do
         job_name = "Electric - Martino Way"
@@ -37,7 +58,6 @@ RSpec.describe JobsController, type: :controller do
       expect(assigns[:job].start_date).to eq(@job.start_date)
       expect(assigns[:job].end_date).to eq(@job.end_date)
     end
-  
   end
 
 end
