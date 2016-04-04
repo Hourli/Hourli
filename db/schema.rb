@@ -11,17 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322143903) do
+ActiveRecord::Schema.define(version: 20160329030913) do
 
   create_table "contractors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "contractors", ["user_id"], name: "index_contractors_on_user_id"
 
   create_table "customers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "customers", ["user_id"], name: "index_customers_on_user_id"
+
+  create_table "job_requests", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.string   "location",    null: false
+    t.float    "hourly_rate", null: false
+    t.text     "categories",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+  end
+
+  add_index "job_requests", ["customer_id"], name: "index_job_requests_on_customer_id"
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +69,9 @@ ActiveRecord::Schema.define(version: 20160322143903) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
