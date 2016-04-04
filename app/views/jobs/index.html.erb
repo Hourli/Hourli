@@ -1,0 +1,30 @@
+<div class="container">
+   <div class="row">
+      <div class="col-sm-12">
+                  
+         <table class = "table table-striped">
+            <h1>Jobs</h1>
+            <caption>Click on a job name to view it</caption>
+            
+            <thead>
+               <tr>
+                  <th>Job Name</th>
+                  <th>Location</th>
+                  <th>Description</th>
+               </tr>
+            </thead>
+            
+            <tbody>
+               <% @jobs.each do |job| %>
+                <tr>
+                  <td><%=link_to "#{job.name}", job_path(job.id) %></td>
+                  <td><%=job.location%></td>
+                  <td><%=job.description%></td>
+                </tr>
+               <% end %>
+            </tbody>
+         </table>
+      <%= link_to 'Create a job', new_job_path %>
+      </div>
+   </div>
+</div>

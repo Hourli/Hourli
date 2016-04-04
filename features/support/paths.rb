@@ -10,6 +10,9 @@ module NavigationHelpers
 			
 		when "New Job"
 			new_job_path
+			
+		when "Jobs"
+			jobs_path
 		
 		when "create job"
 			job_path
