@@ -21,7 +21,7 @@ Feature: Switch between customer and contractor view
     And I am currently viewing as a "customer"
     And I login with valid credentials
     Then I should see "Change role to contractor"
-    And I press "Account"
+    When I press "Account"
     And I wait for ajax after pressing "change_role_btn"
     Then I should see "Viewing as: Contractor"
 
@@ -31,6 +31,6 @@ Feature: Switch between customer and contractor view
     And I am currently viewing as a "contractor"
     And I login with valid credentials
     Then I should see "Change role to customer"
-    And I press "Account"
-    When I wait for ajax after pressing "change_role_btn"
+    When I press "Account"
+    And I wait for ajax after pressing "change_role_btn"
     Then I should see "Viewing as: Customer"
