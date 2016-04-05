@@ -21,7 +21,7 @@ render_views
  		end
 
  		it "should redirect to the show job request page" do
- 			response.should redirect_to job_request_path(JobRequest.find_by_title(@job_request_attributes[:title]))
+ 			expect(response).to redirect_to job_request_path(JobRequest.find_by_title(@job_request_attributes[:title]))
  		end
 
  		it "should have a customer associated with it" do

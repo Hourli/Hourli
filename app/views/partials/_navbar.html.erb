@@ -40,9 +40,9 @@
               <ul class="dropdown-menu">
                 <% if current_user.customer and current_user.contractor %>
                     <li>
-                      <a data-new-role="<% if current_user.role == 'contractor' %>customer<% else %>contractor<% end %>" href="<%= change_role_path %>" id="change_role_btn">
-                        <%= icon('refresh')%>&nbsp;Change role to&nbsp;<% if current_user.role == 'contractor' %>customer<% else %>contractor<% end %>
-                      </a>
+                      <%= link_to change_role_path, remote: true, id: 'change_role_btn'  do %>
+                          <%= icon('refresh')%>&nbsp;Change role to&nbsp;<% if current_user.role == 'contractor' %>customer<% else %>contractor<% end %>
+                      <% end %>
                     </li>
                 <% end %>
                 <li>
@@ -64,5 +64,3 @@
     </div>
   </div>
 </nav>
-
-<%= javascript_include_tag 'change_role' %>
