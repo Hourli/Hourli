@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_one :customer
   has_one :contractor
+  has_many :notifications
   
   after_create :create_customer_contractor_or_both
   

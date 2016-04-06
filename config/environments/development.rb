@@ -41,4 +41,8 @@ Rails.application.configure do
 
   # Devise mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Defaults to 5 minutes, change as desired. Note the value is in milliseconds
+  config.x.poll_interval = 300000
+
 end
