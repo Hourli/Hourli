@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="text-center">All Notifications</h2>
+    </div>
+  </div>
+  <div class="row">
+    <br><br>
+    <div class="col-sm-12">
+      <div class="text-center">
+        <table class="table">
+          <thead>
+          <tr>
+            <th class="text-center">Message</th>
+            <th class="text-center">Notification For</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= render @unread_notifications %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

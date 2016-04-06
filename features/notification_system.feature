@@ -42,7 +42,8 @@ Feature: Notification System
     And I login with valid credentials
     And I have "1" "unread" notifications
     And I have "2" "read" notifications
-    When I press "notification_dropdown"
-    Then I should see "my first notification"
-    Then I should see "my second notification"
-    Then I should see "my third notification"
+    When I press "all_messages_link"
+    Then I am on the "notifications_index" page
+    And I should see "notification_1"
+    And I should see "notification_2"
+    And I should see "notification_3"

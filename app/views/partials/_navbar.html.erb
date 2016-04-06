@@ -38,8 +38,7 @@
                 <span id="notification_badge" class="badge notification notification-bell"></span>
               </a>
               <ul id="notification_content" class="dropdown-menu" aria-labelledby="notification_dropdown">
-                <!--<%= render 'notifications/notifications', collection: {} %>-->
-                <li class="dropdown-header all-messages"><a href="#">See all messages</a></li>
+                <li class="dropdown-header"><a id="all_messages_link" class="all-messages" href="<%= notifications_path %>">See all messages</a></li>
               </ul>
             </li>
 
