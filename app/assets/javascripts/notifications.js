@@ -18,7 +18,7 @@ $(function(){
         if(number_notifications == 0){
             $notification_badge.text('');
         }else if(number_notifications != current_val){
-            $('span.badge').animateCss('swing');
+            $('#notification_badge').animateCss('swing');
             $notification_badge.text(number_notifications);
         }
     };

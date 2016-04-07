@@ -19,54 +19,71 @@ RSpec.describe NotificationsController, type: :controller do
       get :index
       expect(response).to render_template(:index)
     end
+
     context "notifications exist" do
-      it "should assign @unread_notifications" do
+      it "should assign @unread_notifications, sorted by descending created at" do
+        # Note these need to be in order of creation descending
         unread_notification_1 = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
         unread_notification_2 = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
-        unread_notifications = [unread_notification_1, unread_notification_2]
-        expect(controller.current_user.notifications).to receive(:where).with(read: false).and_return(unread_notifications)
-        expect(controller.current_user.notifications).to receive(:where).with(read: true)
+        unread_notifications = [unread_notification_2, unread_notification_1]
         get :index
-        expect(assigns[:unread_notifications]).to match_array(unread_notifications)
+        expect(assigns[:unread_notifications]).to eq(unread_notifications)
       end
 
       it "should assign @read_notifications" do
+        # Note these need to be in order of creation descending
         read_notification_1 = FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user)
         read_notification_2 = FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user)
-        read_notifications = [read_notification_1, read_notification_2]
-        expect(controller.current_user.notifications).to receive(:where).with(read: true).and_return(read_notifications)
-        expect(controller.current_user.notifications).to receive(:where).with(read: false)
+        read_notifications = [read_notification_2, read_notification_1]
         get :index
-        expect(assigns[:read_notifications]).to match_array(read_notifications)
+        expect(assigns[:read_notifications]).to eq(read_notifications)
       end
     end
 
     context "notifications do not exist" do
       it "should assign @unread_notifications to be empty list" do
-        expect(controller.current_user.notifications).to receive(:where).with(read: false).and_return([])
-        expect(controller.current_user.notifications).to receive(:where).with(read: true)
         get :index
-        expect(assigns[:unread_notifications]).to match_array([])
+        expect(assigns[:unread_notifications]).to eq([])
       end
 
       it "should assign @read_notifications to be empty list" do
-        expect(controller.current_user.notifications).to receive(:where).with(read: true).and_return([])
-        expect(controller.current_user.notifications).to receive(:where).with(read: false)
         get :index
-        expect(assigns[:read_notifications]).to match_array([])
+        expect(assigns[:read_notifications]).to eq([])
       end
     end
 
-    context "should respond to ajax with json" do
+    context "should respond to ajax with json or script" do
       it "should return the number of unread notifications for the current user" do
+        # Note these need to be in order of creation descending
         unread_notification_1 = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
         unread_notification_2 = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
-        unread_notifications = [unread_notification_1, unread_notification_2]
-        expect(controller.current_user.notifications).to receive(:where).with(read: false).and_return(unread_notifications)
-        expect(controller.current_user.notifications).to receive(:where).with(read: true)
+        unread_notifications = [unread_notification_2, unread_notification_1]
         xhr :get, :index, format: :json
         expect(response.body).to eq(unread_notifications.length.to_s)
       end
+
+      it "should return max of 5 unread notifications" do
+        7.times{
+          FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
+        }
+        xhr :get, :index, format: :js
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns[:unread_notifications]).to_not be_nil
+        expect(assigns[:unread_notifications].length).to eq(5)
+      end
+
+      it "should return all unread notifications if less than 5 exist" do
+        3.times{
+          FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
+        }
+        xhr :get, :index, format: :js
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns[:unread_notifications]).to_not be_nil
+        expect(assigns[:unread_notifications].length).to eq(3)
+      end
+
     end
 
   end
@@ -95,7 +112,6 @@ RSpec.describe NotificationsController, type: :controller do
       expect(read_notification.read).to be(true)
       xhr :put, :toggle_read_status, id: read_notification.id
       expect(assigns[:notification].read).to be(false)
-      expect(response.body).to eq('successfully updated')
     end
 
     it "should update an unread notification to read with valid id" do
@@ -103,7 +119,6 @@ RSpec.describe NotificationsController, type: :controller do
       expect(unread_notification.read).to be(false)
       xhr :put, :toggle_read_status, id: unread_notification.id
       expect(assigns[:notification].read).to be(true)
-      expect(response.body).to eq('successfully updated')
     end
 
     it "should not toggle read status with blank id" do
@@ -112,7 +127,6 @@ RSpec.describe NotificationsController, type: :controller do
       xhr :put, :toggle_read_status, id: ''
       expect(assigns[:notification]).to be_nil
       expect(notification.read).to be(true)
-      expect(response.body).to eq('Invalid notification id')
     end
 
     it "should not toggle read status with non existent id" do
@@ -122,7 +136,6 @@ RSpec.describe NotificationsController, type: :controller do
       xhr :put, :toggle_read_status, id: '1000'
       expect(assigns[:notification]).to be_nil
       expect(notification.read).to be(true)
-      expect(response.body).to eq('Invalid notification id')
     end
 
     it "should not toggle read status when the current user is not the same as the user on the notification" do
@@ -135,7 +148,6 @@ RSpec.describe NotificationsController, type: :controller do
       expect(notification.read).to be(true)
       xhr :put, :toggle_read_status, id: notification.id
       expect(notification.read).to be(true)
-      expect(response.body).to eq('You do not have permission to do this')
     end
 
   end

@@ -32,13 +32,15 @@
                 <%= submit_tag "Login", id: "login_navbar", class: "btn btn-default btn-sm" %>
             <% end %>
         <% else %>
-            <li>
-              <a id="notification_dropdown" data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                <i id="notification_bell" data-url="<%= notifications_path %>" data-poll-interval="<%= Rails.configuration.x.poll_interval %>" class="fa fa-lg fa-bell-o"></i>
-                <span id="notification_badge" class="badge notification notification-bell"></span>
-              </a>
-              <ul id="notification_content" class="dropdown-menu" aria-labelledby="notification_dropdown">
-                <li class="dropdown-header"><a id="all_messages_link" class="all-messages" href="<%= notifications_path %>">See all messages</a></li>
+            <li class="dropdown">
+              <%= link_to notifications_path, remote: true, id: 'notification_dropdown', class: 'dropdown-toggle', role: 'button', data: {target: '#', toggle: 'dropdown'} do %>
+                  <i id="notification_bell" data-url="<%= notifications_path %>" data-poll-interval="<%= Rails.configuration.x.poll_interval %>" class="fa fa-lg fa-bell-o"></i>
+                  <span id="notification_badge" class="badge notification notification-bell"></span>
+              <% end %>
+
+              <ul class="dropdown-menu navbar-dropdown" aria-labelledby="notification_dropdown">
+                <span id="notification_content"></span>
+                <li class="dropdown-header text-center"><a id="all_messages_link" class="all-messages" href="<%= notifications_path %>">View all messages</a></li>
               </ul>
             </li>
 

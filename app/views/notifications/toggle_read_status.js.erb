@@ -1,3 +1,7 @@
 $(function(){
-    //bind to ajax success for all notification elements
+  $("[name='toggle_read_status']").on('ajax:success', function(){
+    window.location.reload();
+  }).on('ajax:error', function(){
+    alert('Error marking notification as read, please try again');
+  });
 });

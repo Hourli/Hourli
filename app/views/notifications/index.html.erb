@@ -8,18 +8,16 @@
     <br><br>
     <div class="col-sm-12">
       <div class="text-center">
-        <table class="table">
-          <thead>
-          <tr>
-            <th class="text-center">Message</th>
-            <th class="text-center">Notification For</th>
-          </tr>
-          </thead>
-          <tbody>
+        <ul class="list-group">
           <%= render @unread_notifications %>
-          </tbody>
-        </table>
+          <%= render @read_notifications %>
+          <% if @unread_notifications.empty? and @read_notifications.empty? %>
+              <h3>You do not have any notifications</h3>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'enable_tooltips' %>
