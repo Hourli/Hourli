@@ -1,0 +1,10 @@
+<%= content_tag :li, class: (notification.read) ? 'list-group-item read-message' : 'list-group-item', id: "notification_#{notification.id}" do %>
+    <span name="notifiction_for_badge" class="badge pull-left"><%= notification.notification_for.capitalize %></span>
+    <%= notification.message %>&nbsp;
+    <span class="text-muted">
+      <%= time_ago_in_words(notification.created_at, include_seconds: true) %>&nbsp;ago
+    </span>
+    <%= link_to toggle_read_status_notification_path(notification.id), class: 'pull-right', name: 'toggle_read_status', id: "toggle_read_status_#{notification.id}", remote: true, method: :put, title: (notification.read) ? 'Mark as unread' : 'Mark as read', data: {toggle: 'tooltip', placement: 'left'} do %>
+        <span class="fa fa-check pull-right"></span>
+    <% end %>
+<% end %>

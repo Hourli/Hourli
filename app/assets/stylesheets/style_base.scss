@@ -41,3 +41,28 @@ body {
     background-color: #555555;
     color:white;
 }
+
+.all-messages{
+  font-weight: 400 !important;
+  color: #337ab7 !important;
+  box-shadow: none !important;
+}
+
+.read-message{
+  background: #e0e0e0;
+  .fa.fa-check{
+    color: #bababa;
+    //&:hover{
+    //  color: black;
+    //}
+  }
+}
+
+.fa.fa-check:hover{
+  color: black;
+}
+
+.navbar-dropdown{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}

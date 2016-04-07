@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   resources :job_requests
   resources :customers
   resources :contractors
+  resources :notifications, only: [:index] do
+    member do
+      put :toggle_read_status
+    end
+  end
 end
