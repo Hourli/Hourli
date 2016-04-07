@@ -2,13 +2,16 @@ $(function(){
     var fetch_notifications = function(){
         console.log('polling...');
         var $notification_bell = $('#notification_bell');
-        $.get($notification_bell.data('url'), function(response){
-                update_notifications(response);
-            }, "json")
-            .fail(function(){
-                console.log("Error fetching notifications from server");
-            });
-        setTimeout(fetch_notifications, $notification_bell.data('poll-interval'));
+        if($notification_bell.data('url')){
+            $.get($notification_bell.data('url'), function(response){
+                    update_notifications(response);
+                }, "json")
+                .fail(function(){
+                    console.log("Error fetching notifications from server");
+                });
+            setTimeout(fetch_notifications, $notification_bell.data('poll-interval'));
+        }
+
     };
 
     var update_notifications = function(response_data){
