@@ -7,9 +7,9 @@ class NotificationsController < ApplicationController
       format.json { render json: @unread_notifications.count}
       format.js {
         limit = 5
-       if @unread_notifications.count > limit
-         @unread_notifications = @unread_notifications.slice(0, limit)
-       end
+        if @unread_notifications.count > limit
+          @unread_notifications = @unread_notifications.slice(0, limit)
+        end
       }
     end
   end
@@ -17,18 +17,35 @@ class NotificationsController < ApplicationController
   def toggle_read_status
     respond_to do |format|
       format.js {
-        status = :ok
-        @notification = Notification.find_by_id(params[:id])
-        if @notification.nil?
-          status = :bad_request
-        elsif @notification.user.id != current_user.id
-          status = :bad_request
-        else
-          @notification.read = (@notification.read) ? false : true
-          @notification.save
-        end
+        ids = params[:id].split(',')
+        @notifications, status = fetch_and_update_notifications(ids)
         render :toggle_read_status, status: status
       }
     end
   end
+
+
+  def fetch_and_update_notifications(ids)
+    status = :ok
+    results = nil
+    begin
+      results = Notification.find(ids)
+      status = :bad_request if results.nil? or results.empty?
+      results.each do |notification|
+        if notification.user.id != current_user.id
+          results = nil
+          status = :bad_request
+          break
+        else
+          notification.read = (notification.read) ? false : true
+          notification.save
+        end
+      end
+    rescue ActiveRecord::RecordNotFound
+      results = nil
+      status = :bad_request
+    end
+    return results, status
+  end
+
 end

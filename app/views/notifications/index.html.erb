@@ -7,6 +7,13 @@
   <div class="row">
     <br><br>
     <div class="col-sm-12">
+      <% unless @unread_notifications.empty? %>
+          <div class="text-right">
+            <%= form_tag toggle_read_status_notification_path(@unread_notifications.ids.join(',')), method: 'put', remote: true, name: 'toggle_read_status' do %>
+                <%= submit_tag 'Mark all as read', id: 'mark_all_as_read_link', class: 'btn btn-link' %>
+            <% end %>
+          </div>
+      <% end %>
       <div class="text-center">
         <ul class="list-group">
           <%= render @unread_notifications %>

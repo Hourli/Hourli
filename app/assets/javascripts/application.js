@@ -15,7 +15,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require noty/packaged/jquery.noty.packaged
-//= require notifications
 
 $.fn.extend({
     animateCss: function (animationName) {
