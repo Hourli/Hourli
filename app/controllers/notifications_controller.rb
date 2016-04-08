@@ -4,7 +4,14 @@ class NotificationsController < ApplicationController
     @read_notifications = current_user.notifications.where(read: true).order(created_at: :desc)
     respond_to do |format|
       format.html {}
-      format.json { render json: @unread_notifications.count}
+      format.json {
+        if @unread_notifications.count > 0
+          session[:unread_notification_count] = @unread_notifications.count
+        else
+          session[:unread_notification_count] = ''
+        end
+        render json: @unread_notifications.count
+      }
       format.js {
         limit = 5
         if @unread_notifications.count > limit

@@ -46,11 +46,22 @@
 
 .fa.fa-check{
   color: dodgerblue;
-  //&:hover{
-  //  color: #0c29ba;
-  //}
 }
 
 .navbar-notification{
   margin-top: 5px;
+}
+
+.fit-notification-content{
+  overflow: auto;
+}
+
+.badge-customer{
+  @extend .badge;
+  background: darkorange;
+}
+
+.badge-contractor{
+  @extend .badge;
+  background: steelblue;
 }

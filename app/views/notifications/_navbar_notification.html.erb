@@ -1,6 +1,6 @@
-<%= content_tag :li, class: 'list-group-item', id: "notification_#{notification.id}" do %>
+<%= content_tag :li, class: 'list-group-item fit-notification-content', id: "notification_#{notification.id}" do %>
     <%= notification.message %>
-    <%= link_to toggle_read_status_notification_path(notification.id), class: 'pull-right', name: 'toggle_read_status', id: "toggle_read_status_#{notification.id}", remote: true, method: :put, title: (notification.read) ? 'Mark as unread' : 'Mark as read', data: {toggle: 'tooltip', placement: 'left'} do %>
+    <%= link_to toggle_read_status_notification_path(notification.id), class: 'pull-right', name: 'toggle_read_status', id: "toggle_read_status_#{notification.id}", remote: true, method: :put, title: (notification.read) ? 'Mark as unread' : 'Mark as read' do %>
         <span class="fa fa-check navbar-notification"></span>
     <% end %>
 <% end %>
