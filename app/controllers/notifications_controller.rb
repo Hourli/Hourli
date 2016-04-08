@@ -7,6 +7,8 @@ class NotificationsController < ApplicationController
       format.json {
         if @unread_notifications.count > 0
           session[:unread_notification_count] = @unread_notifications.count
+        else
+          session[:unread_notification_count] = ''
         end
         render json: @unread_notifications.count
       }
