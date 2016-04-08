@@ -88,7 +88,7 @@ Rails.application.configure do
       :enable_starttls_auto => true
   }
 
-  # 5 minutes
-  config.x.poll_interval = 300000
+  # 1 minute
+  config.x.poll_interval = 60000
 
 end
