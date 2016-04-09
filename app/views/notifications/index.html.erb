@@ -5,8 +5,11 @@
     </div>
   </div>
   <div class="row">
+    <br>
     <div class="col-sm-12">
-      <% unless @unread_notifications.empty? %>
+      <% if @unread_notifications.empty? %>
+          <br>
+      <% else %>
           <div class="text-right">
             <%= form_tag toggle_read_status_notification_path(@unread_notifications.ids.join(',')), method: 'put', remote: true, name: 'toggle_read_status' do %>
                 <%= submit_tag 'Mark all as read', id: 'mark_all_as_read_link', class: 'btn btn-link' %>
@@ -25,5 +28,3 @@
     </div>
   </div>
 </div>
-
-<%= javascript_include_tag 'enable_tooltips' %>
