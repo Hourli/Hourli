@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20160405165538) do
     t.text     "location"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "ongoing",     default: true
   end
 
   create_table "notifications", force: :cascade do |t|

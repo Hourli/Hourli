@@ -4,7 +4,7 @@
                   
          <table class = "table table-striped">
             <h1>Jobs</h1>
-            <caption>Click on a job name to view it</caption>
+            <caption>Click on a job name to view/edit it</caption>
             
             <thead>
                <tr>
@@ -17,7 +17,7 @@
             <tbody>
                <% @jobs.each do |job| %>
                 <tr>
-                  <td><%=link_to "#{job.name}", job_path(job.id) %></td>
+                  <td><%=link_to "#{job.name}", job_path(job.id)%></td>
                   <td><%=job.location%></td>
                   <td><%=job.description%></td>
                 </tr>

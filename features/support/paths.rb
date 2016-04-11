@@ -8,15 +8,23 @@ module NavigationHelpers
 			when "contact us"
 				contact_path
 
+
 		    when /^details for '(.*)' $/
 				edit_job_request_path(JobRequest.find_by_title($1))
+
+		when "job request"
+			job_request_path
+			
+	    when "edit job"
+	    	edit_job_path
+
 
 			when "New Job"
 				new_job_path
 
 			when "Jobs"
 				jobs_path
-
+			
 			when "new job request"
 				new_job_request_path
 
@@ -44,6 +52,8 @@ module NavigationHelpers
 			when "notifications_index"
 				notifications_path
 		end
+		else
+      
 	end
 end
 World(NavigationHelpers)
