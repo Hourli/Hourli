@@ -8,6 +8,10 @@ class JobsController < ApplicationController
         @job = Job.new
     end
     
+    def edit
+        @job = Job.find(params[:id])
+    end
+    
     def create
         @job = Job.create(job_params)
         if @job.valid?
@@ -20,9 +24,27 @@ class JobsController < ApplicationController
         end
     end
     
+    def update
+     @job = Job.find(params[:id])
+ 
+     if @job.update(job_params)
+       flash[:notice] = "The job was successfully updated"
+       redirect_to @job
+     else
+       render 'edit'
+     end
+    end
+    
     def show
         @job = Job.find(params[:id])
     end
+    
+    def destroy
+    @job = Job.find(params[:id])
+    @job.destroy
+    flash[:notice] = "The job was successfully deleted"
+    redirect_to jobs_path
+  end
     
     private
      def job_params
