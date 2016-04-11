@@ -50,7 +50,13 @@
                       <%= icon('cog')%>&nbsp;<%=current_user.email%>
                   <% end %>
                 </li>
-
+                <% if current_user.role == "contractor" %>
+                  <li>
+                    <%= link_to edit_contractor_path do %>
+                      <%= icon('cog')%>&nbsp;Edit Contractor Profile
+                    <% end %>
+                  </li>
+                <% end %>
                 <li class="divider"></li>
                 <li>
                   <%= link_to destroy_user_session_path, :method => 'delete' do %>
