@@ -1,0 +1,7 @@
+$(function(){
+  $('#change_role_btn').on('ajax:success', function(){
+    window.location.href = '<%= root_path %>';
+  }).on('ajax:error', function(){
+    alert('Error changing role, please try again');
+  });
+});

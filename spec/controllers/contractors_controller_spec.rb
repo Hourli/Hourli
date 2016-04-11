@@ -14,8 +14,6 @@ RSpec.describe ContractorsController, type: :controller do
 			end
 			it "should create a contractor" do
 				expect(@user.contractor).not_to be_nil
-				puts(@user.customer)
-
 			end
 		end
 	end
