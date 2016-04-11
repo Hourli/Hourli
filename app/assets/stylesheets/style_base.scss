@@ -32,6 +32,10 @@ body {
   @extend .alert-danger;
 }
 
+.noty_type_error{
+  @extend .alert-danger;
+}
+
 .text-small{
   font-size: 13px;
   line-height: 1.4em;

@@ -14,7 +14,6 @@ def confirm_user_account
 
   @user.confirmed_at = Time.now
   @user.save!
-
 end
 
 def destroy_user_account

@@ -24,6 +24,10 @@ And(/^I click on about us link$/) do
 	click_link("about_us")
 end
 
+And(/^I click on "([^"]*)" link$/) do |link|
+	click_link(link)
+end
+
 Then(/^I am on the "([^"]*)" page$/) do |page|
 	expect(current_path).to eq(path_to(page))
 end
