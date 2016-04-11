@@ -8,6 +8,9 @@ module NavigationHelpers
 			when "contact us"
 				contact_path
 
+		    when /^details for '(.*)' $/
+				edit_job_request_path(JobRequest.find_by_title($1))
+
 			when "New Job"
 				new_job_path
 
