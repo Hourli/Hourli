@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="text-center">All Notifications</h2>
+    </div>
+  </div>
+  <div class="row">
+    <br>
+    <div class="col-sm-12">
+      <% if @unread_notifications.empty? %>
+          <br>
+      <% else %>
+          <div class="text-right">
+            <%= form_tag toggle_read_status_notification_path(@unread_notifications.ids.join(',')), method: 'put', remote: true, name: 'toggle_read_status' do %>
+                <%= submit_tag 'Mark all as read', id: 'mark_all_as_read_link', class: 'btn btn-link' %>
+            <% end %>
+          </div>
+      <% end %>
+      <div class="text-center">
+        <ul class="list-group">
+          <%= render @unread_notifications %>
+          <%= render @read_notifications %>
+          <% if @unread_notifications.empty? and @read_notifications.empty? %>
+              <h3>You do not have any notifications</h3>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
