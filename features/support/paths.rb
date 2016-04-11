@@ -45,9 +45,16 @@ module NavigationHelpers
 			when "edit user"
 				edit_user_registration_path
 
+			when "edit user"
+				edit_user_registration_path
+
+			when "edit contractor profile"
+				edit_contractor_path
+
 			when "notifications_index"
 				notifications_path
 		end
+
 	end
 end
 World(NavigationHelpers)
