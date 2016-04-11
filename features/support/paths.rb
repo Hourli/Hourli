@@ -10,6 +10,7 @@ module NavigationHelpers
 
 		    when /^details for '(.*)' $/
 				edit_job_request_path(JobRequest.find_by_title($1))
+		
 
 			when "New Job"
 				new_job_path
@@ -25,6 +26,9 @@ module NavigationHelpers
 
 			when "create job"
 				job_path
+				
+			when "edit job"
+				edit_job_path
 
 			when "about us"
 				about_us_path
