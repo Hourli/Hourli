@@ -59,5 +59,31 @@ RSpec.describe JobsController, type: :controller do
       expect(assigns[:job].end_date).to eq(@job.end_date)
     end
   end
+  
+  describe "PATCH #update" do
+    before(:each) do
+      @job = FactoryGirl.create(:job)
+    end
+    
+    it "should update an attribute for an existing job, set the flash, and redirect to the job path" do
+        patch :update, :id => @job.id, :job => {:name => 'Electric UPDATED'}
+        expect(Job.find(@job.id).name).to eq('Electric UPDATED')
+        expect(flash[:notice]).to eq("The job was successfully updated")
+        expect(response).to redirect_to(@job)
+    end
+  end
+  
+  describe "DELETE #destroy" do
+    before(:each) do
+      @job = FactoryGirl.create(:job)
+    end
+    
+    it "should delete a movie with the given id in the database, set the flash, and redirect to the jobs path" do
+        delete :destroy, :id => @job.id
+        expect(Job.exists?(@job.id)).to be_falsy
+        expect(flash[:notice]).to eq("The job was successfully deleted")
+        expect(response).to redirect_to(jobs_path)
+    end
+  end
 
 end

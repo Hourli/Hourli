@@ -15,6 +15,7 @@ def create
 		render :new
 		puts @job_request.errors.full_messages
 		
+		
 	end
 
 end
@@ -22,12 +23,22 @@ def new
 	@job_request = JobRequest.new
 end
 def edit
-
+    @job_request = JobRequest.find(params[:id])
 end
 def show
 	@job_request = JobRequest.find(params[:id])
 end
 def update
+	@job_request = JobRequest.find(params[:id])
+	@job_request.update_attributes(job_request_params)
+    if @job_request.valid?
+    flash[:notice] = "The job request was successfully updated."
+    @job_request.save
+    redirect_to job_request_path(@job_request)
+	else
+	  render :edit
+	  puts @job_request.errors.full_messages
+	end
 
 end
 def destroy

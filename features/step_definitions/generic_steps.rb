@@ -1,3 +1,9 @@
+def wait_for_ajax
+	Timeout.timeout(Capybara.default_max_wait_time) do
+		loop until page.evaluate_script('jQuery.active').zero?
+	end
+end
+
 Then(/^I should see "([^"]*)"$/) do |arg|
 	expect(page.body).to have_content(arg)
 end
@@ -44,7 +50,5 @@ end
 
 And(/^I wait for ajax after pressing "([^"]*)"$/) do |arg|
 	click_on(arg)
-	Timeout.timeout(Capybara.default_max_wait_time) do
-		loop until 	page.evaluate_script('jQuery.active').zero?
-	end
+	wait_for_ajax
 end

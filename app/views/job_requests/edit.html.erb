@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br><br><br>
+      <div class="text-center">
+        <h2>
+          Edit Existing Job Request
+        </h2>
+          <%= bootstrap_form_for(@job_request, label_errors: true, url: job_request_path(@job_request), :method=>:put) do |f| %>
+          <%= f.text_field :title, autofocus: true %>
+          <%= f.text_area :description %>
+          <%= f.text_field :location%>
+          <%= f.number_field :hourly_rate, step:"0.01"%>
+          <%= f.text_area :categories%>
+        
+          <%= f.submit "Update", class: "btn btn-primary", id: "update_job_request" %>
+          <%= link_to 'Cancel', job_request_path(@job_request),class: "btn btn-primary", id: "cancel_to_edit_job_request"%>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

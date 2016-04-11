@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   resources :contractors, :only => [:create, :delete]
   get '/contractor/edit' => 'contractors#edit', as: "edit_contractor"
   put '/contractor/update' => 'contractors#update', as: "update_contractor"
+  resources :contractors
+  resources :notifications, only: [:index] do
+    member do
+      put :toggle_read_status
+    end
+  end
 end
