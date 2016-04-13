@@ -42,6 +42,11 @@ def update
 
 end
 def destroy
+	@job_request = JobRequest.find(params[:id])
+    @job_request.destroy
+    flash[:notice] = "The job request was successfully deleted."
+    redirect_to job_requests_path
+
 
 end
 	private

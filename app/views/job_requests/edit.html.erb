@@ -14,7 +14,8 @@
           <%= f.text_area :categories%>
         
           <%= f.submit "Update", class: "btn btn-primary", id: "update_job_request" %>
-          <%= link_to 'Cancel', job_request_path(@job_request),class: "btn btn-primary", id: "cancel_to_edit_job_request"%>
+          <%= link_to 'Cancel', job_request_path(@job_request),class: "btn btn-primary", 
+          id: "cancel_to_edit_job_request" %>
       <% end %>
       </div>
     </div>

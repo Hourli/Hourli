@@ -35,7 +35,8 @@
       <%= @job_request.categories %>
       </p>
       
-      <%= link_to 'Edit', edit_job_request_path(@job_request),class: "btn btn-primary" %>
+      <%= link_to 'Edit', edit_job_request_path(@job_request),class: "btn btn-primary", id: "edit_job_request"%>
+      <%= link_to 'Delete', job_request_path(@job_request), :method => :delete, class: "btn btn-primary" , id: "delete_job_request"%>     
       </div>
     </div>
   </div>
