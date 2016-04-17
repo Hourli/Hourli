@@ -63,6 +63,13 @@ body {
   color: black;
 }
 
+.fa.fa-trash{
+  color: indianred;
+  &:hover{
+  color: darkred;
+  }
+}
+
 .navbar-dropdown{
   padding-top: 0px;
   padding-bottom: 0px;

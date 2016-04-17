@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   def index
-    @unread_notifications = current_user.notifications.where(read: false).order(created_at: :desc)
-    @read_notifications = current_user.notifications.where(read: true).order(created_at: :desc)
+    @unread_notifications = current_user.notifications.where(read: false, hidden: false).order(created_at: :desc)
+    @read_notifications = current_user.notifications.where(read: true, hidden: false).order(created_at: :desc)
     respond_to do |format|
       format.html {}
       format.json {
@@ -53,6 +53,18 @@ class NotificationsController < ApplicationController
       status = :bad_request
     end
     return results, status
+  end
+
+  def hide
+    status = :found
+    notification = Notification.find_by(id: params[:id])
+    if notification.nil? or notification.user.id != current_user.id
+      status = :bad_request
+    else
+      notification.hidden = ! notification.hidden
+      notification.save
+    end
+    redirect_to notifications_path, status: status
   end
 
 end

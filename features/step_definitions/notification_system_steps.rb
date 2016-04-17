@@ -1,12 +1,12 @@
-def create_notifications(count, read_or_unread)
+def create_notifications(count, read_or_unread, notification_for)
   count = count.to_i
   count.times { |i|
-    FactoryGirl.create(:notification, user: @user, message: "notification_#{i+1}", notification_for: 'customer', read: (read_or_unread == 'read') ? true : false)
+    FactoryGirl.create(:notification, user: @user, message: "notification_#{i+1}", notification_for: notification_for.nil? ? 'customer' : notification_for, read: (read_or_unread == 'read') ? true : false)
   }
 end
 
-Given(/^I have "([^"]*)" "([^"]*)" notifications$/) do |arg1, arg2|
-  create_notifications(arg1, arg2)
+Given(/^I have "([^"]*)" "([^"]*)"\s?(?:"([^"]*)")?\s?notifications$/) do |arg1, arg2, arg3|
+  create_notifications(arg1, arg2, arg3)
 end
 
 Then(/^The notification bell should display "([^"]*)"$/) do |arg|
