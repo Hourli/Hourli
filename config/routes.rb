@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index] do
     member do
       put :toggle_read_status
+      put :hide
     end
   end
 end

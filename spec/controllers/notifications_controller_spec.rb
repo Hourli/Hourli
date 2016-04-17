@@ -32,6 +32,14 @@ RSpec.describe NotificationsController, type: :controller do
           expect(assigns[:unread_notifications]).to eq(unread_notifications)
         end
 
+        it "should not show any hidden unread notifications" do
+          hidden_notification_1 = FactoryGirl.create(:notification, read: false, hidden: true, notification_for: 'customer', user: @user)
+          unread_notification_2 = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
+          unread_notifications = [unread_notification_2]
+          get :index
+          expect(assigns[:unread_notifications]).to eq(unread_notifications)
+        end
+
         it "should assign @read_notifications" do
           # Note these need to be in order of creation descending
           read_notification_1 = FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user)
@@ -40,6 +48,15 @@ RSpec.describe NotificationsController, type: :controller do
           get :index
           expect(assigns[:read_notifications]).to eq(read_notifications)
         end
+
+        it "should not show any hidden read notifications" do
+          hidden_notification_1 = FactoryGirl.create(:notification, read: true, hidden: true, notification_for: 'customer', user: @user)
+          read_notification_2 = FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user)
+          read_notifications = [read_notification_2]
+          get :index
+          expect(assigns[:read_notifications]).to eq(read_notifications)
+        end
+
       end
 
       context "notifications do not exist" do
@@ -240,6 +257,50 @@ RSpec.describe NotificationsController, type: :controller do
         expect(assigns[:notifications]).to be_nil
         expect(response).to have_http_status(:bad_request)
       end
+    end
+  end
+
+  describe "PUT #hide" do
+    before(:each) do
+      @user = FactoryGirl.create(:user, role: 'both')
+      @user.confirmed_at = Time.now
+      @user.save!
+      sign_in :user, @user
+    end
+
+    it "should return http redirect with a valid id" do
+      notification = FactoryGirl.create(:notification, read: false, hidden: false, notification_for: 'customer', user: @user)
+      put :hide, id: notification.id
+      expect(response).to have_http_status(:found)
+    end
+
+    it "should return http bad request with non existent id" do
+      put :hide, id: '1000'
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it "should return http bad request with blank id" do
+      put :hide, id: ''
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it "should make the specified notification hidden with valid id" do
+      notification = FactoryGirl.create(:notification, read: false, hidden: false, notification_for: 'customer', user: @user)
+      expect(notification.hidden).to be(false)
+      put :hide, id: notification.id
+      expect(@user.notifications.find_by(id: notification.id).hidden).to be(true)
+    end
+
+    it "should not hide the notification when the current user is not the same as the user on the notification" do
+      # The current user is @user, while the user associated w/ the notification is second_user. @user is trying to modify
+      # a notification that does not belong to them
+      second_user = FactoryGirl.create(:user, role: 'both', email: 'myseconduser@hourli.com')
+      second_user.confirmed_at = Time.now
+      second_user.save!
+      notification = FactoryGirl.create(:notification, read: false, hidden: false, notification_for: 'customer', user: second_user)
+      expect(notification.hidden).to be(false)
+      put :hide, id: notification.id
+      expect(second_user.notifications.find_by(id: notification.id).hidden).to be(false)
     end
   end
 
