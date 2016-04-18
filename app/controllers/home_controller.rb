@@ -3,10 +3,14 @@ class HomeController < ApplicationController
 
   #leading to dashboard according to the role
   def index
-    if current_user.role == "customer"
-      redirect_to customers_path
-    else current_user.role == "contractor"
-      redirect_to contractors_path
+    if user_signed_in?
+      if current_user.role == "customer"
+        redirect_to customers_path
+      elsif current_user.role == "contractor"
+        redirect_to contractors_path
+      end
+    else
+      render :index
     end
   end
 
