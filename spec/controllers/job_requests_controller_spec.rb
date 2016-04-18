@@ -74,5 +74,18 @@ render_views
     end
   end
 
+    describe "DELETE #destroy" do
+    before(:each) do
+      @job_request = FactoryGirl.create(:job_request)
+    end
+    
+    it "should delete a job request with the given id in the database, display a flash message, and redirect to the index page" do
+        delete :destroy, :id => @job_request.id
+        expect(JobRequest.exists?(@job_request.id)).to be_falsy
+        expect(flash[:notice]).to eq("The job request was successfully deleted.")
+        expect(response).to redirect_to(job_requests_path)
+    end
+  end
+
 
 end

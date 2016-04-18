@@ -16,6 +16,8 @@ Background: job requests in database
 Scenario: edit an existing job request
   Given I am logged in
   When I go to the "details for 'carpenter' " page 
+  And I press "edit_job_request"
+  Then I am on the "edit 'carpenter' " page 
   When  I fill in "job_request_title" with "housekeeper"
   And I fill in "job_request_description" with "constructing building"
   And I fill in "job_request_hourly_rate" with "25"
@@ -28,6 +30,6 @@ Scenario: edit an existing job request
 
  Scenario: cancel to edit an existing job request
   Given I am logged in
-  When I go to the "details for 'carpenter' " page 
-  And I press "cancel_to_edit_job_request"
+  When I go to the "edit 'carpenter' " page 
+  When I press "cancel_to_edit_job_request"
   Then I should see "carpenter"
