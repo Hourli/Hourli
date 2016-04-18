@@ -29,6 +29,17 @@ RSpec.describe Notification, type: :model do
       expect(result).to match_array(@user_1_read_notifications)
       expect(result).to_not include(@user_2_read_notification)
     end
+
+    it "should fetch only visible notifications" do
+      result = @user_1.notifications.where(read: true, hidden: false)
+      expect(result).to match_array(@user_1_read_notifications)
+    end
+
+    it "should default to a notification being visible" do
+      notification = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user_1)
+      expect(notification.hidden).to be(false)
+    end
+
   end
 
   describe "validations" do
