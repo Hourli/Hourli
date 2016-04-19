@@ -1,8 +1,13 @@
 class ContractorsController < ApplicationController
-	def create
-		current_user.contractor = Contractor.create()
-		redirect_to edit_user_registration_path
-	end
+  
+      def index
+      
+      end
+  
+	    def create
+		    current_user.contractor = Contractor.create()
+		    redirect_to edit_user_registration_path
+	    end
 
       def edit
           @contractor = current_user.contractor

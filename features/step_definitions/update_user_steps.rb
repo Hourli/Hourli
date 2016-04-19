@@ -18,5 +18,5 @@ end
 
 Given /^I am logged in with email "([^"]*)" and password "([^"]*)"/ do |email,password|
   login_with(email, password)
-  expect(page.body).to have_content("Welcome " + email + "!")
+  expect(page.body).to have_content('Signed in successfully.')
 end
