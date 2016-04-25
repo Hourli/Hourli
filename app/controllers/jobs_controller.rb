@@ -30,6 +30,7 @@ class JobsController < ApplicationController
     
     def update
      @job = Job.find(params[:id])
+     puts params[:completed]
  
      if @job.update(job_params)
        flash[:notice] = "The job was successfully updated"
@@ -52,7 +53,7 @@ class JobsController < ApplicationController
     
     private
      def job_params
-      params.require(:job).permit(:name, :description, :location, :start_date, :end_date)
+      params.require(:job).permit(:name, :description, :location, :start_date, :end_date, :completed)
      end
     
 end
