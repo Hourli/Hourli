@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="table-responsive">
+      <div class = "col-xs-12 col-md-12">
+        <table class = "table table-striped">
+          <h3>Job Requests</h3>
+          <!--<caption>Click on a textbook title to view it</caption>-->
+
+          <thead>
+           <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Hourly Rate</th>
+            <th>Category</th>
+          </tr>
+          </thead>
+
+          <tbody>
+            <% @job_requests.each do |job_request| %>
+              <tr>
+                <td class="col-xs-4 col-md-4"><%=link_to "#{job_request.title}", job_request_path(job_request.id) %></td>
+                <td class="col-xs-2 col-md-2"><%= job_request.description %></td>
+                <td class="col-xs-2 col-md-2"><%= job_request.location %></td>
+                <td class="col-xs-4 col-md-3"><%= job_request.hourly_rate %></td>
+                <td class="col-xs-4 col-md-3"><%= job_request.categories %></td>
+              
+                <td class="hidden-xs col-xs-1"></td>
+                <td class="hidden-xs col-xs-1"></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <%= link_to 'Post Job Request!', new_job_request_path, class: "btn btn-primary" %>
+      <p>
+
+    </div>
+  </div>
+</div>

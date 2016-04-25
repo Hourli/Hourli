@@ -1,7 +1,7 @@
 class JobRequestsController < ApplicationController
 	
 def index
-	
+	@job_requests = JobRequest.all
 end
 def create
 	@job_request=JobRequest.create(job_request_params)
