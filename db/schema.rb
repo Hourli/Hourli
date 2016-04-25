@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417032735) do
+ActiveRecord::Schema.define(version: 20160425171053) do
 
   create_table "contractors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -51,9 +51,13 @@ ActiveRecord::Schema.define(version: 20160417032735) do
     t.text     "location"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "contractor_id"
+    t.boolean  "completed",     default: false
   end
+
+  add_index "jobs", ["contractor_id"], name: "index_jobs_on_contractor_id"
 
   create_table "notifications", force: :cascade do |t|
     t.string   "message",                          null: false

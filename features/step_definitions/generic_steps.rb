@@ -16,6 +16,14 @@ When(/^I go to the "([^"]*)" page$/) do |page|
 	visit(path_to(page))
 end
 
+When(/^I check "([^"]*)"$/) do |element|
+	check(element)
+end
+
+When(/^I uncheck "([^"]*)"$/) do |element|
+	uncheck(element)
+end
+
 And(/^I click on contact us link$/) do
 	click_link("contact_us")
 end
@@ -37,6 +45,7 @@ When (/^I fill in "([^"]*)" with "([^"]*)"$/) do |a1,a2|
 end
 
 When (/^(?:|I )press "([^"]*)"$/) do |button|
+	#puts(page.body)
 	click_on(button)
 end
 
