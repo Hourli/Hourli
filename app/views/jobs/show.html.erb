@@ -24,6 +24,15 @@
   <%= @job.end_date%>
 </p>
 
+<p>
+  <strong>Completed:</strong>
+  <% if @job.completed %>
+      <i class="fa fa-1x fa-check-square" aria-hidden="true"></i>
+  <% else %>
+     <i class="fa fa-1x fa-times" aria-hidden="true"></i>
+  <% end %>
+</p>
+
 <%= link_to 'Edit Job' , edit_job_path(@job) %>
 
 <%= link_to 'Delete this job', job_path(@job),
