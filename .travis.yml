@@ -13,6 +13,7 @@ bundler_args:
 
 script:
   - bundle exec rake db:test:prepare
+  - sleep 10
   - bundle exec rake environment elasticsearch:import:model CLASS='JobRequest'
   - bundle exec rake spec
   - bundle exec rake cucumber:all
