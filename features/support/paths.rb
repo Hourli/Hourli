@@ -58,6 +58,8 @@ module NavigationHelpers
 
 			when "notifications_index"
 				notifications_path
+			when "search"
+				search_job_requests_path
 		end
 
 	end

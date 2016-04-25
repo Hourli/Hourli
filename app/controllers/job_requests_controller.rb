@@ -22,12 +22,15 @@ end
 def new
 	@job_request = JobRequest.new
 end
+
 def edit
     @job_request = JobRequest.find(params[:id])
 end
+
 def show
 	@job_request = JobRequest.find(params[:id])
 end
+
 def update
 	@job_request = JobRequest.find(params[:id])
 	@job_request.update_attributes(job_request_params)
@@ -41,14 +44,16 @@ def update
 	end
 
 end
+
 def destroy
-	@job_request = JobRequest.find(params[:id])
-    @job_request.destroy
-    flash[:notice] = "The job request was successfully deleted."
-    redirect_to job_requests_path
-
-
 end
+
+def search
+	if params[:q].present?
+		@job_requests = JobRequest.search(params[:q]).page(params[:page]).records
+	end
+end
+
 	private
 		def job_request_params
 			params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)

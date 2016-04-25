@@ -4,6 +4,8 @@ class ContractorsController < ApplicationController
 		redirect_to edit_user_registration_path
 	end
 
+  def index
+  end
       def edit
           @contractor = current_user.contractor
       end
