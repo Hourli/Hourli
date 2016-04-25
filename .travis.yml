@@ -12,7 +12,7 @@ bundler_args:
   - --without production
 
 script:
-  - bundle exec rake db:test:prepare
+  - bundle exec rake db:test:prepare --trace
   - sleep 10
   - bundle exec rake spec
   - bundle exec rake cucumber:all
