@@ -13,7 +13,7 @@ Scenario: Register as a customer
   And I fill in "user_password_confirmation" with "weakpassword"
   When I select "Customer" from "user_role"
   And I press "user_sign_up_btn"
-  Then I am on the "home" page
+  Then I am on the "customer_dashboard" page
 
 Scenario: Register as a contractor
   Given I go to the "sign up" page
@@ -24,7 +24,7 @@ Scenario: Register as a contractor
   And I fill in "user_password_confirmation" with "weakpassword"
   When I select "Contractor" from "user_role"
   And I press "user_sign_up_btn"
-  Then I am on the "home" page
+  Then I am on the "contractor_dashboard" page
   
 Scenario: Register as both customer and contractor
   Given I go to the "sign up" page
@@ -35,7 +35,7 @@ Scenario: Register as both customer and contractor
   And I fill in "user_password_confirmation" with "weakpassword"
   When I select "Both" from "user_role"
   And I press "user_sign_up_btn"
-  Then I am on the "home" page
+  Then I am on the "customer_dashboard" page
   
 Scenario: Attempt to submit empty registration form
     Given I go to the "sign up" page

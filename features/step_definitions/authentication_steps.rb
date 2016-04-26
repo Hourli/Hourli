@@ -4,7 +4,7 @@ end
 
 def create_confirmed_user_account(role='customer')
   create_unconfirmed_user_account(role)
-  confirm_user_account
+  # confirm_user_account
 end
 
 def confirm_user_account
