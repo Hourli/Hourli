@@ -19,9 +19,3 @@ Feature: Login to my existing account
     When I login with an invalid "password"
     Then I should not be logged in
     And I should see "Invalid email or password."
-
-  Scenario: Login with unconfirmed account
-    Given I have an unconfirmed account
-    When I login with valid credentials
-    Then I should not be logged in
-    And I should see "You have to confirm your email address before continuing."
