@@ -11,7 +11,6 @@ Given /^the following user exists:$/ do |table|
   table.hashes.each do |user|
     user = User.new(first_name: user[:first_name], last_name: user[:last_name], 
                           email: user[:email], password: user[:password], role: user[:role])
-    user.skip_confirmation!
     user.save
   end
 end
