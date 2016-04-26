@@ -1,7 +1,9 @@
 class JobsController < ApplicationController
     
     def index
-        @jobs = Job.all
+        #@jobs = Job.all
+        @jobs = current_user.contractor.jobs.all
+        #@completed_jobs = Job.all.where(ongoing: false)
     end
     
     def new
@@ -16,6 +18,8 @@ class JobsController < ApplicationController
         @job = Job.create(job_params)
         if @job.valid?
             flash[:notice] = "#{@job.name} was successfully created."
+            @job.contractor= current_user.contractor
+            @job.save
             redirect_to @job
         else
             #puts @job.errors.full_messages
@@ -26,6 +30,7 @@ class JobsController < ApplicationController
     
     def update
      @job = Job.find(params[:id])
+     puts params[:completed]
  
      if @job.update(job_params)
        flash[:notice] = "The job was successfully updated"
@@ -48,7 +53,7 @@ class JobsController < ApplicationController
     
     private
      def job_params
-      params.require(:job).permit(:name, :description, :location, :start_date, :end_date)
+      params.require(:job).permit(:name, :description, :location, :start_date, :end_date, :completed)
      end
     
 end

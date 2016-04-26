@@ -17,7 +17,7 @@
             <tbody>
                <% @jobs.each do |job| %>
                 <tr>
-                  <td><%=link_to "#{job.name}", job_path(job.id) %></td>
+                  <td><%=link_to "#{job.name}", job_path(job.id), id: "job_#{job.id}" %></td>
                   <td><%=job.location%></td>
                   <td><%=job.description%></td>
                 </tr>

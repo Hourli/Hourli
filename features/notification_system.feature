@@ -45,7 +45,6 @@ Feature: Notification System
   Scenario: View notification messages via nav bar dropdown
     Given I have a confirmed "both" account
     And I login with valid credentials
-    And I am on the "home" page
     And I have "2" "unread" notifications
     And I press "notification_dropdown"
     Then I should see "notification_1" in "notification_1"
@@ -57,7 +56,8 @@ Feature: Notification System
     And I login with valid credentials
     And I have "2" "unread" notifications
     When I press "notification_dropdown"
-    And I press "toggle_read_status_1"
+#    And I press "toggle_read_status_1"
+    And I wait for ajax after pressing "toggle_read_status_1"
     Then I should not see "notification_1"
     And The notification bell should display "1"
 
