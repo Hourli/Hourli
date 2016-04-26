@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417032735) do
+ActiveRecord::Schema.define(version: 20160406220234) do
 
   create_table "contractors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160417032735) do
     t.integer  "user_id",                          null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.boolean  "hidden",           default: false
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
