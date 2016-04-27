@@ -6,7 +6,7 @@ class CreateJobRequests < ActiveRecord::Migration
       t.string :location,           null: false
       t.float  :hourly_rate,       null: false
       t.text   :categories,         null: false
-      #t.integer :customer_id,       null: true
+     # t.integer :customer_id,       null: false
       
       t.timestamps null: false
     end

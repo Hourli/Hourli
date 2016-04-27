@@ -7,6 +7,17 @@ render_views
         @user.confirmed_at = Time.now
         @user.save!
         sign_in :user, @user
+
+
+      #created to test the authentication process
+      request_2_attrs=FactoryGirl.attributes_for :job_request
+      request_2_attrs["title"] = "recorder"
+      request_2_attrs["description"]="multiple sentences."
+      request_2_attrs["location"] = "Binghamton"
+      request_2_attrs["hourly_rate"] = 31.2
+      request_2_attrs["categories"] = "Recording"
+      request_2_attrs["customer_id"]=2
+      @job_request_2 = FactoryGirl.create(:job_request, request_2_attrs)
         
     end
 
@@ -53,12 +64,20 @@ render_views
  describe "Get #edit" do
  	before do
       @job_request = FactoryGirl.create(:job_request)
+
     end
-    it "should render the edit page" do
+    it "should render the edit page when currest user is the owner of the job request" do
       get :edit, :id => @job_request.id
       expect(response).to render_template(:edit)
       expect(response.body).to include(@job_request[:title])
     end
+
+    it "should display a alert message, and go back to the customers index page" do
+      get :edit, :id => @job_request_2.id
+      expect(flash[:alert]).to eq("You do not have permission to be here")
+      expect(response).to redirect_to(customers_path)
+    end
+
  end
 
 
@@ -71,6 +90,12 @@ render_views
         expect(JobRequest.find(@job_request.id).location).to eq("New Street")
         expect(flash[:notice]).to eq("The job request was successfully updated.")
         expect(response).to redirect_to(job_request_path(@job_request))
+    end
+
+    it "should display a alert message, and go back to the customers index page" do
+      patch :update, :id => @job_request_2.id, :job_request => {:location => "New Street"}
+      expect(flash[:alert]).to eq("You do not have permission to be here")
+      expect(response).to redirect_to(customers_path)
     end
   end
 
@@ -85,7 +110,13 @@ render_views
         expect(flash[:notice]).to eq("The job request was successfully deleted.")
         expect(response).to redirect_to(job_requests_path)
     end
+
+      it "should display a alert message, and go back to the customers index page" do
+      delete :destroy, :id => @job_request_2.id
+      expect(flash[:alert]).to eq("You do not have permission to be here")
+      expect(response).to redirect_to(customers_path)
   end
+end
 
 
 end
