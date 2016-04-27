@@ -1,22 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+    <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4">
 
-        <h1>Edit job</h1>
+      <h1>Edit job</h1>
 
+      <%= bootstrap_form_for(@job, label_errors: true, url: job_path(@job), method: :patch) do |f| %>
+          <%= f.text_field :name %>
+          <%= f.text_area :description %>
+          <%= f.text_field :location %>
+          <%= f.date_field :start_date %>
+          <%= f.date_field :end_date %>
+          <%= f.form_group :ongoing do %>
+              <%= f.check_box :completed, label: "Check this box if the job is completed"%>
+          <% end %>
+          <%= f.submit "Submit Job Changes", id: "editjob", class: "btn btn-primary" %>
+      <% end %>
+      <br>
+      <%= link_to 'New Task', new_job_task_path(@job.id), id: 'new_task', class: 'btn btn-sm btn-success' %>
 
-<%= bootstrap_form_for(@job, label_errors: true, url: job_path(@job), method: :patch) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.text_field :location %>
-  <%= f.date_field :start_date %>
-  <%= f.date_field :end_date %>
-  <%= f.form_group :ongoing do %>
-  <%= f.check_box :completed, label: "Check this box if the job is completed"%>
-  <% end %>
-  <%= f.submit "Submit Job Changes", id: "editjob", class: "btn btn-primary" %>
-<% end %>
-
-</div>
-</div>
+    </div>
+  </div>
 </div>

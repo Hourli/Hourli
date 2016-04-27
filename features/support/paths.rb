@@ -11,11 +11,11 @@ module NavigationHelpers
 			when "viewing job requests"
 				job_requests_path
 
-		    when /^edit '(.*)' $/
+			when /^edit '(.*)' $/
 				edit_job_request_path(JobRequest.find_by_title($1))
-		    
-		    when /^details for '(.*)' $/
-		    	job_request_path(JobRequest.find_by_title($1))
+
+			when /^details for '(.*)' $/
+				job_request_path(JobRequest.find_by_title($1))
 
 			when "New Job"
 				new_job_path
@@ -31,9 +31,9 @@ module NavigationHelpers
 
 			when "create job"
 				job_path
-				
-			when "edit job"
-				edit_job_path
+
+			when /^edit job '([^']*)'$/
+				edit_job_path($1)
 
 			when "about us"
 				about_us_path
@@ -58,8 +58,11 @@ module NavigationHelpers
 
 			when "notifications_index"
 				notifications_path
-		end
 
+			when /^new_task '([^']*)'$/
+				new_job_task_path($1)
+
+		end
 	end
 end
 World(NavigationHelpers)
