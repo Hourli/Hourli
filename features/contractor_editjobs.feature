@@ -14,7 +14,7 @@ Feature: Edit/Delete a job as a contractor
     
     Given I go to the "Jobs" page
     Then I press "job_1"
-    Then I press "Edit Job"
+    Then I press "Edit job"
     And I fill in "Name" with "Electric - Martino Way update new"
     And I fill in "Description" with "Replace ceiling fans in bedrooms"
     And I fill in "Location" with "16 Martino Way, Pomona NY, 10970"
@@ -31,7 +31,7 @@ Feature: Edit/Delete a job as a contractor
     
     Given I go to the "Jobs" page
     Then I press "Electric - Martino Way"
-    Then I press "Edit Job"
+    Then I press "Edit job"
     And I check "job_completed"
     When I press "Submit Job Changes"
     Then the job should be completed
@@ -40,7 +40,7 @@ Feature: Edit/Delete a job as a contractor
     
     Given I go to the "Jobs" page
     Then I press "Electric - Martino Way"
-    Then I press "Edit Job"
+    Then I press "Edit job"
     And I uncheck "job_completed"
     When I press "Submit Job Changes"
     Then the job should not be completed

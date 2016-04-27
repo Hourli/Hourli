@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425171053) do
+ActiveRecord::Schema.define(version: 20160426232201) do
 
   create_table "contractors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 20160425171053) do
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "title",                       null: false
+    t.string   "description"
+    t.boolean  "completed",   default: false
+    t.float    "duration"
+    t.integer  "job_id",                      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
