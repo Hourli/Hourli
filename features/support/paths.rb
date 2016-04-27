@@ -58,6 +58,9 @@ module NavigationHelpers
 
 			when "notifications_index"
 				notifications_path
+			
+			when "search"
+				search_job_requests_path
 
 			when /^new_task '([^']*)'$/
 				new_job_task_path($1)

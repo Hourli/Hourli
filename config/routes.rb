@@ -10,12 +10,13 @@ Rails.application.routes.draw do
   get '/about-us', to: 'home#about'
   get '/change_role', to: 'change_roles#change_role'
 
+  get '/job_requests/search' => 'job_requests#search', as: "search_job_requests"
   resources :jobs do
     resources :tasks
   end
   resources :job_requests
   resources :customers
-  resources :contractors, :only => [:create, :delete]
+  resources :contractors, :only => [:create, :delete, :index]
   get '/contractor/edit' => 'contractors#edit', as: "edit_contractor"
   put '/contractor/update' => 'contractors#update', as: "update_contractor"
   resources :contractors
