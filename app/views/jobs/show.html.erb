@@ -1,42 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-8">
+      <br><br><br>
 
-<p>
-  <strong>Job Title:</strong>
-  <%= @job.name %>
-</p>
- 
-<p>
-  <strong>Job Description:</strong>
-  <%= @job.description %>
-</p>
+      <h4>
+        <strong>Job Title:</strong>
+        <%= @job.name %>
+      </h4>
 
-<p>
-  <strong>Job Location:</strong>
-  <%= @job.location %>
-</p>
+      <h4>
+        <strong>Job Description:</strong>
+        <%= @job.description %>
+      </h4>
 
-<p>
-  <strong>Start Date:</strong>
-  <%= @job.start_date %>
-</p>
+      <h4>
+        <strong>Job Location:</strong>
+        <%= @job.location %>
+      </h4>
 
-<p>
-  <strong>End Location:</strong>
-  <%= @job.end_date%>
-</p>
+      <h4>
+        <strong>Start Date:</strong>
+        <%= @job.start_date %>
+      </h4>
 
-<p>
-  <strong>Completed:</strong>
-  <% if @job.completed %>
-      <i class="fa fa-1x fa-check-square" aria-hidden="true"></i>
-  <% else %>
-     <i class="fa fa-1x fa-times" aria-hidden="true"></i>
-  <% end %>
-</p>
+      <h4>
+        <strong>End Date:</strong>
+        <%= @job.end_date%>
+      </h4>
 
-<%= link_to 'Edit Job' , edit_job_path(@job) %>
-
-<%= link_to 'Delete this job', job_path(@job),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-
-<%= link_to 'All Jobs', jobs_path %>
+      <h4>
+        <strong>Completed:</strong>
+        <% if @job.completed %>
+            <i class="fa fa-1x fa-check-square" aria-hidden="true"></i>
+        <% else %>
+            <i class="fa fa-1x fa-times" aria-hidden="true"></i>
+        <% end %>
+      </h4>
+      <br>
+      <%= link_to 'Back to all jobs', jobs_path, class: 'btn btn-xs btn-back' %>
+      <%= link_to 'Edit job' , edit_job_path(@job), class: 'btn btn-xs btn-primary' %>
+      <%= link_to 'Delete this job', job_path(@job),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+    </div>
+  </div>
+</div>
