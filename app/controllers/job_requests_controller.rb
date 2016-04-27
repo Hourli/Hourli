@@ -25,8 +25,11 @@ def new
 end
 def edit	
     @job_request = JobRequest.find(params[:id])
-
-     #authentication_before_action
+	#puts "***************"
+ 	#puts @job_request.customer_id
+ 	#puts current_user.customer.id
+	#puts "$$$$$$$$$$$$$$$$"
+    #authentication_before_action
     if @job_request.customer_id != current_user.customer.id
 
     	flash[:alert] = "You do not have permission to be here"
@@ -46,17 +49,18 @@ def update
 
     	flash[:alert] = "You do not have permission to be here"
     	redirect_to customers_path
-   end
+    else
 
 
-	@job_request.update_attributes(job_request_params)
-    if @job_request.valid?
-    flash[:notice] = "The job request was successfully updated."
-    @job_request.save
-    redirect_to job_request_path(@job_request)
-	else
-	  render :edit
-	  puts @job_request.errors.full_messages
+		@job_request.update_attributes(job_request_params)
+    	if @job_request.valid?
+    	flash[:notice] = "The job request was successfully updated."
+    	@job_request.save
+    	redirect_to job_request_path(@job_request)
+		else
+	  	render :edit
+	  	puts @job_request.errors.full_messages
+		end
 	end
 
 end
@@ -68,25 +72,21 @@ def destroy
 
     	flash[:alert] = "You do not have permission to be here"
     	redirect_to customers_path
-   end
+    else
 
 
-    @job_request.destroy
-    flash[:notice] = "The job request was successfully deleted."
-    redirect_to job_requests_path
-	
-def authentication_before_action
-	    if @job_request.customer_id != current_user.customer.id
-    	flash[:alert] = "You do not have permission to be here"
-    	redirect_to customers_path
+    	@job_request.destroy
+    	flash[:notice] = "The job request was successfully deleted."
+    	redirect_to job_requests_path
     end
-end
-
-
-
 
 
 end
+
+	
+
+
+
 	private
 		def job_request_params
 			params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)

@@ -5,7 +5,7 @@ FactoryGirl.define do
     location "123 Fake Street"
     hourly_rate 15.50
     categories "Landscaping manual labor"
-    #customer_id 10
+    customer_id 1
   end
 end
 
