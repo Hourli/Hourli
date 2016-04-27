@@ -12,8 +12,9 @@ bundler_args:
   - --without production
 
 script:
-  - bundle exec rake db:test:prepare --trace
-  - sleep 10
+  - bundle exec rake db:test:prepare
+  - bundle exec rake environment elasticsearch:import:model CLASS='JobRequest'
+  - sleep 20
   - bundle exec rake spec
   - bundle exec rake cucumber:all
 

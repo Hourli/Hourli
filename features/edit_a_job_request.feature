@@ -5,7 +5,9 @@ Feature: Edit a job request as a customer
 	I want to edit a job request
 
 Background: job requests in database
- 
+  Given I have a confirmed "both" account
+  And I am currently viewing as a "customer"
+  And I login with valid credentials
   Given the following job requests exist:
   | title        | description               | location    | hourly_rate | categories    |
   | carpenter    | constructing building     | Binghamton  | 25          | laborer       |
@@ -14,9 +16,8 @@ Background: job requests in database
 
 
 Scenario: edit an existing job request
-  Given I am logged in
-  When I go to the "details for 'carpenter' " page 
-  And I press "edit_job_request"
+  Given I go to the "details for 'carpenter' " page 
+  When I press "edit_job_request"
   Then I am on the "edit 'carpenter' " page 
   When  I fill in "job_request_title" with "housekeeper"
   And I fill in "job_request_description" with "constructing building"
@@ -29,7 +30,6 @@ Scenario: edit an existing job request
 
 
  Scenario: cancel to edit an existing job request
-  Given I am logged in
   When I go to the "edit 'carpenter' " page 
   When I press "cancel_to_edit_job_request"
   Then I should see "carpenter"
