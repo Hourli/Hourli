@@ -1,10 +1,10 @@
 class JobRequestsController < ApplicationController
 
-def index
-	
-end
-def create
-	@job_request=JobRequest.create(job_request_params)
+	def index
+		
+	end
+	def create
+		@job_request=JobRequest.create(job_request_params)
 	# current_user.job_requests.new
 	if @job_request.valid?
 		flash[:notice] = "A new job request was successfully created"
@@ -25,17 +25,12 @@ def new
 end
 
 def edit	
-    @job_request = JobRequest.find(params[:id])
-	#puts "***************"
- 	#puts @job_request.customer_id
- 	#puts current_user.customer.id
-	#puts "$$$$$$$$$$$$$$$$"
-    #authentication_before_action
-    if @job_request.customer_id != current_user.customer.id
+	@job_request = JobRequest.find(params[:id])
+	if @job_request.customer_id != current_user.customer.id
 
-    	flash[:alert] = "You do not have permission to be here"
-    	redirect_to customers_path
-   end
+		flash[:alert] = "You do not have permission to be here"
+		redirect_to customers_path
+	end
 
 end
 
@@ -48,43 +43,41 @@ def update
 	@job_request = JobRequest.find(params[:id])
 
 	     #authentication_before_action
-    if @job_request.customer_id != current_user.customer.id
+	     if @job_request.customer_id != current_user.customer.id
 
-    	flash[:alert] = "You do not have permission to be here"
-    	redirect_to customers_path
-    else
+	     	flash[:alert] = "You do not have permission to be here"
+	     	redirect_to customers_path
+	     else
 
 
-		@job_request.update_attributes(job_request_params)
-    	if @job_request.valid?
-    	flash[:notice] = "The job request was successfully updated."
-    	@job_request.save
-    	redirect_to job_request_path(@job_request)
-		else
-	  	render :edit
-	  	puts @job_request.errors.full_messages
-		end
-	end
+	     	@job_request.update_attributes(job_request_params)
+	     	if @job_request.valid?
+	     		flash[:notice] = "The job request was successfully updated."
+	     		@job_request.save
+	     		redirect_to job_request_path(@job_request)
+	     	else
+	     		render :edit
+	     		puts @job_request.errors.full_messages
+	     	end
+	     end
 
-end
+	 end
 
-def destroy
-	@job_request = JobRequest.find(params[:id])
+	 def destroy
+	 	@job_request = JobRequest.find(params[:id])
 
 	#authentication_before_action
-    if @job_request.customer_id != current_user.customer.id
+	if @job_request.customer_id != current_user.customer.id
 
-    	flash[:alert] = "You do not have permission to be here"
-    	redirect_to customers_path
-    else
+		flash[:alert] = "You do not have permission to be here"
+		redirect_to customers_path
+	else
 
 
-    	@job_request.destroy
-    	flash[:notice] = "The job request was successfully deleted."
-    	redirect_to job_requests_path
-    end
-
-def destroy
+		@job_request.destroy
+		flash[:notice] = "The job request was successfully deleted."
+		redirect_to job_requests_path
+	end
 end
 
 def search
@@ -93,9 +86,9 @@ def search
 	end
 end
 
-	private
-		def job_request_params
-			params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
-		end
-	
+private
+def job_request_params
+	params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
+end
+
 end
