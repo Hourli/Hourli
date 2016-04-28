@@ -17,7 +17,12 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+
+<% if content_for? :body %>
+    <%= yield :body %>
+<% else %>
+    <body>
+<% end %>
 
 <%= render 'partials/navbar' %>
 
