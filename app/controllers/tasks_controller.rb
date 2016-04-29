@@ -21,9 +21,17 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find_by(id: params[:id])
   end
 
   def update
+    @task = Task.find_by(id: params[:id])
+    if @task.update(task_params)
+      flash[:notice] = "Task successfully updated"
+      redirect_to edit_job_task_path(@job, @task)
+    else
+      render :edit
+    end
   end
 
   def delete

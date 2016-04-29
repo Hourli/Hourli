@@ -1,2 +1,18 @@
-<h1>Tasks#edit</h1>
-<p>Find me in app/views/tasks/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4">
+      <br><br>
+      <h1>Edit Task</h1>
+      <br>
+      <%= bootstrap_form_for([@job, @task], label_errors: true) do |f| %>
+          <%= f.text_field :title %>
+          <%= f.text_area :description %>
+          <%= f.number_field :duration, label: 'Duration (in minutes)' %>
+          <%= f.form_group :completed do %>
+              <%= f.check_box :completed, label: "Check this box if the task is completed"%>
+          <% end %>
+          <%= f.submit 'Update Task', class: 'btn btn-primary', id: 'update_task' %>
+      <% end %>
+    </div>
+  </div>
+</div>
