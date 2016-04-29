@@ -103,6 +103,20 @@ RSpec.describe TasksController, type: :controller do
       expect(assigns[:task]).not_to be_nil
       expect(assigns[:job]).not_to be_nil
     end
+
+    it "should not allow editing when the current user is not the same as the user on the job" do
+      second_user = FactoryGirl.create(:user, role: 'both', email: 'myseconduser@hourli.com')
+      second_user.role = 'contractor'
+      second_user.save!
+      job = FactoryGirl.create(:job, name: "MyJob", description: "MyDescription", location: "MyLocation", start_date: "2015-05-05", end_date: "2015-05-10", contractor: second_user.contractor)
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: job.id)
+      expect(@task.title).to eq("MyTitle")
+      get :edit, {job_id: job.id, id: @task.id}
+      expect(@task.title).to eq("MyTitle")
+      expect(flash[:alert]).to eq("You do not have permission to perform this action")
+      expect(response).to redirect_to(root_path)
+    end
+
   end
 
   describe "PATCH #update" do
@@ -124,6 +138,18 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to render_template(:edit)
     end
 
+    it "should not allow editing when the current user is not the same as the user on the job" do
+      second_user = FactoryGirl.create(:user, role: 'both', email: 'myseconduser@hourli.com')
+      second_user.role = 'contractor'
+      second_user.save!
+      job = FactoryGirl.create(:job, name: "MyJob", description: "MyDescription", location: "MyLocation", start_date: "2015-05-05", end_date: "2015-05-10", contractor: second_user.contractor)
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: job.id)
+      expect(@task.title).to eq("MyTitle")
+      get :edit, {job_id: job.id, id: @task.id}
+      expect(@task.title).to eq("MyTitle")
+      expect(flash[:alert]).to eq("You do not have permission to perform this action")
+      expect(response).to redirect_to(root_path)
+    end
   end
 
   describe "DELETE #destroy" do
@@ -139,6 +165,20 @@ RSpec.describe TasksController, type: :controller do
       expect(Task.find_by(id: @task.id)).to be_nil
       expect(flash[:notice]).to eq("#{@task.title} successfully deleted")
     end
+
+    it "should not allow delete when the current user is not the same as the user on the job" do
+      second_user = FactoryGirl.create(:user, role: 'both', email: 'myseconduser@hourli.com')
+      second_user.role = 'contractor'
+      second_user.save!
+      job = FactoryGirl.create(:job, name: "MyJob", description: "MyDescription", location: "MyLocation", start_date: "2015-05-05", end_date: "2015-05-10", contractor: second_user.contractor)
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: job.id)
+      expect(@task.title).to eq("MyTitle")
+      delete :destroy, {job_id: job.id, id: @task.id}
+      expect(@task.title).to eq("MyTitle")
+      expect(flash[:alert]).to eq("You do not have permission to perform this action")
+      expect(response).to redirect_to(root_path)
+    end
+
   end
 
 end
