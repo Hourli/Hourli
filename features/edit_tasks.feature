@@ -1,4 +1,7 @@
 Feature: Edit a task
+  As a contractor
+  So that I keep my tasks up to date
+  I want to be able to update a task
 
   Background: Valid account and jobs exist in the database
     Given I have a confirmed "both" account

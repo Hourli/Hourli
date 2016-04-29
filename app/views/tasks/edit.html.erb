@@ -13,6 +13,10 @@
           <% end %>
           <%= f.submit 'Update Task', class: 'btn btn-primary', id: 'update_task' %>
       <% end %>
+
+      <br>
+      <%= link_to 'Delete Task', job_task_path(@job.id, @task.id), method: :delete, class: 'btn btn-xs btn-danger', id: 'delete_task', data: { confirm: 'Are you sure?' } %>
+
     </div>
   </div>
 </div>

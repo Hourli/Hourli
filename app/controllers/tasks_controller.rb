@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
-    if @task.update(task_params)
+    if not @task.nil? and @task.update(task_params)
       flash[:notice] = "Task successfully updated"
       redirect_to edit_job_task_path(@job, @task)
     else
@@ -34,7 +34,11 @@ class TasksController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    @task = Task.find_by(id: params[:id])
+    @task.destroy
+    flash[:notice] = "#{@task.title} successfully deleted"
+    redirect_to edit_job_path(@job)
   end
 
   private
