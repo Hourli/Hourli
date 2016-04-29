@@ -67,6 +67,9 @@ module NavigationHelpers
 
 			when /^edit_task '([^']*)' '([^']*)'$/
 				edit_job_task_path($1, $2)
+
+			when /^view job '([^']*)'$/
+				job_path($1)
 		end
 	end
 end

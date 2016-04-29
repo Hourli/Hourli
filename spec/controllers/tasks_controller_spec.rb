@@ -18,13 +18,6 @@ RSpec.describe TasksController, type: :controller do
     @job = FactoryGirl.create(:job, job_attrs)
   end
 
-  # describe "GET #index" do
-  #   it "returns http success" do
-  #     get :index
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-
   describe "GET #new" do
     context "valid job id" do
       it "returns http success" do

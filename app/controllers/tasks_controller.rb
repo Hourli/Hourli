@@ -1,9 +1,6 @@
 class TasksController < ApplicationController
   before_action :restrict_to_contractors, :retrieve_job
 
-  def index
-  end
-
   def new
     @task = Task.new
   end
@@ -36,7 +33,7 @@ class TasksController < ApplicationController
     end
     if not @task.nil? and @task.update(task_params)
       flash[:notice] = "Task successfully updated"
-      redirect_to edit_job_task_path(@job, @task)
+      redirect_to job_path(@job)
     else
       render :edit
     end

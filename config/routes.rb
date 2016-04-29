@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get '/job_requests/search' => 'job_requests#search', as: "search_job_requests"
   resources :jobs do
-    resources :tasks
+    resources :tasks, except: [:show, :index]
   end
   resources :job_requests
   resources :customers
