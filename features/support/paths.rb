@@ -65,6 +65,8 @@ module NavigationHelpers
 			when /^new_task '([^']*)'$/
 				new_job_task_path($1)
 
+			when /^edit_task '([^']*)' '([^']*)'$/
+				edit_job_task_path($1, $2)
 		end
 	end
 end

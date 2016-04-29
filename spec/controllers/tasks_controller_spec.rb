@@ -84,25 +84,61 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  # describe "GET #edit" do
-  #   it "returns http success" do
-  #     get :edit
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-  #
-  # describe "GET #update" do
-  #   it "returns http success" do
-  #     get :update
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-  #
-  # describe "GET #delete" do
-  #   it "returns http success" do
-  #     get :delete
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "GET #edit" do
+    it "returns http success" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      get :edit, {job_id: @job.id, id: @task.id}
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should render the edit template" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      get :edit, {job_id: @job.id, id: @task.id}
+      expect(response).to render_template(:edit)
+    end
+
+    it "should assign task and job" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      get :edit, {job_id: @job.id, id: @task.id}
+      expect(assigns[:task]).not_to be_nil
+      expect(assigns[:job]).not_to be_nil
+    end
+  end
+
+  describe "PATCH #update" do
+    it "returns http redirect" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      patch :update, {job_id: @job.id, id: @task.id, task: {title: "MyNewTitle"}}
+      expect(response).to have_http_status(:redirect)
+    end
+
+    it "should update the task" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      patch :update, {job_id: @job.id, id: @task.id, task: {title: "MyNewTitle"}}
+      expect(assigns[:task].title).to eq("MyNewTitle")
+      expect(flash[:notice]).to eq("Task successfully updated")
+    end
+
+    it "should render edit on invalid id" do
+      patch :update, {job_id: @job.id, id: 2222, task: {title: "MyNewTitle"}}
+      expect(response).to render_template(:edit)
+    end
+
+  end
+
+  describe "DELETE #destroy" do
+    it "returns http redirect" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      delete :destroy, {job_id: @job.id, id: @task.id}
+      expect(response).to have_http_status(:redirect)
+    end
+
+    it "deletes the task" do
+      @task = FactoryGirl.create(:task, title: "MyTitle", description: "MyDescription", completed: true, duration: 3, job_id: @job.id)
+      delete :destroy, {job_id: @job.id, id: @task.id}
+      expect(Task.find_by(id: @task.id)).to be_nil
+      expect(flash[:notice]).to eq("#{@task.title} successfully deleted")
+    end
+  end
 
 end
