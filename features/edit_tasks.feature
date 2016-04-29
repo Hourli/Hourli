@@ -28,5 +28,5 @@ Feature: Edit a task
       And I go to the "edit_task '1' '1'" page
       And I fill in "task_title" with "MyNewTitle"
       And I press "update_task"
-      Then I am on the "edit_task '1' '1'" page
+      Then I am on the "view job '1'" page
       And I should see "Task successfully updated"
