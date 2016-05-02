@@ -1,80 +1,86 @@
-  <head>
-  <title>Landing page</title>
-  <style>
-  body {
-      position: relative;
+<%= stylesheet_link_tag 'home' %>
 
-  }
-  ul.nav-pills {
-      top: 100px;
-      position: fixed;
-  }
-  div.col-sm-9 div {
-      height: 500px;
-      font-size: 28px;
-  }
-  #overview {color: black; background-color: white;}
-  #feature1 {color: black; background-color: white;}
-  #feature2 {color: black; background-color: white;}
-  #feature3 {color: black; background-color: white;}
-  #feature4 {color: black; background-color: white;}
+<% content_for :body do %>
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+<% end %>
 
-  @media screen and (max-width: 810px) {
-    #overview, #feature1, #feature2, #feature3,#feature4 {
-        margin-left: 150px;
-    }
-  }
-  </style>
-
-</head>
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
-
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <nav class="col-sm-3" id="myScrollspy">
-      <ul class="nav nav-pills nav-stacked">
-     
-        <li class="active"><a href="#overview">Overview</a></li>
-        <li><a href="#feature1">Track Your Jobs</a></li>
-        <li><a href="#feature2">Add Tasks to Your Job</a></li>
-        <li><a href="#feature3">Find a Contractor</a></li>
-        <li><a href="#feature4">Find a Customer</a></li>
-      </ul>
-    </nav>
-    <div class="col-sm-9" >
-      <div id="overview">    
-       <br> <h1> <font color="cadetblue" size="6" > <center>Welcome to Hourli! </center></font></h1> <br>
+    <div class="col-sm-2">
+      <nav id="myScrollspy">
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a href="#overview">Overview</a></li>
+          <li><a href="#track_your_jobs">Track Your Jobs</a></li>
+          <li><a href="#add_tasks_to_jobs">Add Tasks to Your Job</a></li>
+          <li><a href="#find_contractor">Find a Contractor</a></li>
+          <li><a href="#find_customer">Find a Customer</a></li>
+        </ul>
+      </nav>
+    </div>
 
-       <p><font color="black" size="3">
-       This is a website that helps you to track your jobs which charge an hourly fee for services. You can create jobs, create tasks for each of those jobs and record how long you've been working on each task, what it involved, etc. You can also find a constractor or customer on our website. Sign up today and Explore more!
-       </font></p> <br><br>
-       <center> <% if user_signed_in? %>
-            <h2>Welcome <%= current_user.email %>!</h2>
-        <% else %>
-            <h2><%= link_to "Signup", new_user_registration_path, class: "btn-lg btn-primary" %></h2>
-        <% end %>
-       </center>
-        <br> <br> 
+    <div class="col-sm-9">
+      <div id="overview">
+        <br>
+        <h1 class="text-center">Welcome to Hourli!</h1>
+        <br>
+        <p>
+          Hourli provides a way for you to track any jobs which charge an hourly fee for services. You can create
+          jobs, create tasks for each of those jobs and record how long you've been working on each task, what it
+          involved, etc. You can also find a contractor or customer on our website. Sign up today and Explore more!
+        </p>
+
+        <br><br>
+        <div class="text-center">
+          <%= link_to "Signup", new_user_registration_path , class: 'btn btn-lg btn-success' %>
+        </div>
+
+
       </div>
-      <div id="feature1"> 
-        <h3><font color="cadetblue" >Feature 1: Track Your Jobs</font></h3> <br>
-        <p> <font color="black" size="3">The most important function of our website is to track your jobs which charge hourly, no matter a formal job or a personal cleaning work. After you log in as a contractor, you will see lists of your onging jobs and completed jobs. Click the "+" label, you can create a new job that you want to keep track of. We help you to manage your jobs efficiently! </font></p>
-      </div>        
-      <div id="feature2">         
-        <h3><font color="cadetblue" >Feature 2: Add Tasks to Your Job</font></h3> <br>
-        <p> <font color="black" size="3">When tracking a job, you can freely split a job into several different tasks, and add some specific requirement to each task to remind yourself. You don't need to do that all at once, but are able to add or remove any task at any time. Rome wasn't built in a day. After spliting your job into small tasks, no job is intimidating any more!</font></p>
+
+      <div id="track_your_jobs">
+        <h3>Feature 1: Track Your Jobs</h3>
+        <br>
+        <p>
+          The most important function of our website is to track your jobs which charge
+          hourly, no matter a formal job or a personal cleaning work. After you log in as a contractor, you will see
+          lists of your ongoing jobs and completed jobs. Click the "+" label, you can create a new job that you want to
+          keep track of. We help you to manage your jobs efficiently!
+        </p>
+
       </div>
-      <div id="feature3">         
-        <h3><font color="cadetblue" >Feature 3: Find a Contractor</font></h3> <br>
-        <p> <font color="black" size="3">Want a person to work for you? Come here! When you log in as a customer, you can create and post a new job request. In the job request, you need to provide with the corrsponding title, description, location, hourly fee, and categories. After posting the job request on our website, just wait! We have thounds of job hunters and you will certainly find a suitable person!  </font></p>
-      </div>    
-       <div id="feature4">         
-        <h3><font color="cadetblue" >Feature 4: Find a Customer</font></h3> <br>
-        <p> <font color="black" size="3">Want to find a job? Come here! When you log in as a contractor, you can search current job requests that are posted by some customers in our website. Find one that meets your need and accept the job request. If the customer also wants you, you'll be notified. Then you can start to work and use our website to track your job progress. Easy enough?</font></p>
-      </div>    
+
+      <div id="add_tasks_to_jobs">
+        <h3>Feature 2: Add Tasks to Your Job</h3>
+        <br>
+        <p>
+          When tracking a job, you can freely split a job into several different tasks, and
+          add some specific requirement to each task to remind yourself. You don't need to do that all at once, but
+          are able to add or remove any task at any time. Rome wasn't built in a day. After splitting your job into
+          small tasks, no job is intimidating any more!
+        </p>
+      </div>
+
+      <div id="find_contractor">
+        <h3>Feature 3: Find a Contractor</h3>
+        <br>
+        <p>
+          Want a person to work for you? Come here! When you log in as a customer, you can
+          create and post a new job request. In the job request, you need to provide with the corresponding title,
+          description, location, hourly fee, and categories. After posting the job request on our website, just wait! We
+          have thousands of job hunters and you will certainly find a suitable person!
+        </p>
+      </div>
+
+      <div id="find_customer">
+        <h3>Feature 4: Find a Customer</h3>
+        <br>
+        <p>
+          Want to find a job? Come here! When you log in as a contractor, you can search
+          current job requests that are posted by some customers in our website. Find one that meets your need and
+          accept the job request. If the customer also wants you, you'll be notified. Then you can start to work and use
+          our website to track your job progress. Easy enough?
+        </p>
+      </div>
     </div>
   </div>
-
-
-</body>
 </div>

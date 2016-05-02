@@ -1,3 +1,23 @@
-// Place all the styles related to the Home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ul.nav-pills {
+  top: 100px;
+  position: fixed;
+}
+
+div.col-sm-9 div {
+  height: 350px;
+}
+
+@media screen and (max-width: 810px) {
+  #overview, #track_your_jobs, #add_tasks_to_jobs, #find_contractor,#find_customer {
+    margin-left: 150px;
+  }
+}
+
+
+h1, h3 {
+  color: cadetblue;
+}
+
+p {
+  font-size: larger;
+}
