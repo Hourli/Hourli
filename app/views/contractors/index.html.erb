@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br><br><br>
+      <div class="text-center">
+        <%= bootstrap_form_tag(label_errors: true, url: search_job_requests_path, :method=>:get) do |f| %>
+        <%= f.text_field :q, label: "Search Job Requests", id: "search_job_request_field", autofocus: true %>
+        <%= f.submit "Search", class: "btn btn-primary", id: "search_job_requests" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
