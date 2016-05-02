@@ -1,8 +1,8 @@
 class JobRequestsController < ApplicationController
 
 def index
-	
 end
+
 def create
 	@job_request=JobRequest.create(job_request_params)
 	# current_user.job_requests.new
@@ -15,15 +15,14 @@ def create
 		#flash[:notice] = "Fail to create a job request: missing fields"
 		render :new
 		puts @job_request.errors.full_messages
-		
-		
 	end
-
 end
+
 def new
 	@job_request = JobRequest.new
 end
-def edit	
+
+def edit
     @job_request = JobRequest.find(params[:id])
 	#puts "***************"
  	#puts @job_request.customer_id
@@ -37,10 +36,12 @@ def edit
    end
 
 end
+
 def show
 	@job_request = JobRequest.find(params[:id])
 
 end
+
 def update
 	@job_request = JobRequest.find(params[:id])
 
@@ -64,6 +65,7 @@ def update
 	end
 
 end
+
 def destroy
 	@job_request = JobRequest.find(params[:id])
 
@@ -83,13 +85,9 @@ def destroy
 
 end
 
-	
-
-
-
-	private
-		def job_request_params
-			params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
-		end
+private
+	def job_request_params
+		params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
+	end
 	
 end
