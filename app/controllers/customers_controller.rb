@@ -11,6 +11,8 @@ class CustomersController < ApplicationController
 
   def dashboard
     @job_requests = current_user.customer.job_requests
+    @ongoing_jobs = current_user.customer.jobs.where(completed: false)
+    @completed_jobs = current_user.customer.jobs.where(completed: true)
   end
 
 end

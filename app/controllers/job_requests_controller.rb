@@ -1,7 +1,7 @@
 class JobRequestsController < ApplicationController
 
   def index
-
+    @job_requests = current_user.customer.job_requests
   end
 
   def create
@@ -37,7 +37,6 @@ end
 
 def show
   @job_request = JobRequest.find(params[:id])
-
 end
 
 def update
@@ -61,7 +60,6 @@ def update
           puts @job_request.errors.full_messages
         end
        end
-
    end
 
    def destroy
