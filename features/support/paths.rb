@@ -32,6 +32,9 @@ module NavigationHelpers
 			when "new job request"
 				new_job_request_path
 
+			when "view job requests"
+				customer_dashboard_path
+
 			when "job request"
 				job_request_path
 

@@ -43,6 +43,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Change as desired. Note the value is in milliseconds
-  config.x.poll_interval = 5000
+  config.x.poll_interval = 120000
 
 end
