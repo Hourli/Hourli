@@ -13,5 +13,6 @@ class Job < ActiveRecord::Base
     validates :end_date, :presence => true
     
     belongs_to :contractor
+    belongs_to :customer
     has_many :tasks
 end
