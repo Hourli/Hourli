@@ -14,8 +14,14 @@ module NavigationHelpers
 			when /^edit '(.*)' $/
 				edit_job_request_path(JobRequest.find_by_title($1))
 
+			when /^job offer '(.*)'$/
+				job_offer_path(JobOffer.find_by_title($1))
+
 			when /^details for '(.*)' $/
 				job_request_path(JobRequest.find_by_title($1))
+
+			when /^new job offer$/
+				new_job_offer_path
 
 			when "New Job"
 				new_job_path

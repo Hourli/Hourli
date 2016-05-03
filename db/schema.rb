@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 20160502223132) do
 
   add_index "customers", ["user_id"], name: "index_customers_on_user_id"
 
+  create_table "job_offers", force: :cascade do |t|
+    t.string   "title",          null: false
+    t.text     "description",    null: false
+    t.float    "hourly_rate",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "contractor_id",  null: false
+    t.integer  "job_request_id", null: false
+  end
+
+  add_index "job_offers", ["contractor_id"], name: "index_job_offers_on_contractor_id"
+  add_index "job_offers", ["job_request_id"], name: "index_job_offers_on_job_request_id"
+
   create_table "job_requests", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
