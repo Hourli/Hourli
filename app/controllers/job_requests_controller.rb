@@ -78,8 +78,7 @@ class JobRequestsController < ApplicationController
         end
     end
 
-<<<<<<< HEAD
-   def destroy
+ def destroy
     @job_request = JobRequest.find(params[:id])
 
   #authentication_before_action
@@ -105,13 +104,11 @@ end
   def view_offers
   end
 
-=======
-    def search
-        if params[:q].present? and params[:q] != ""
-            @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
-        end
-    end
->>>>>>> f94296d7ddecbf9f32276060cde4615174fc130c
+  def search
+      if params[:q].present? and params[:q] != ""
+          @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
+      end
+  end
 
 private
     def job_request_params

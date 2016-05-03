@@ -14,18 +14,17 @@ Rails.application.routes.draw do
   resources :jobs do
     resources :tasks, except: [:show, :index]
   end
-<<<<<<< HEAD
+
   resources :job_requests do
     member do
       get 'view_offers', to: 'job_requests#view_offers', as: 'view_offers'
     end
   end
-=======
+
   resources :job_requests
   resources :job_offers
   #resources :customers
   resources :contractors, :only => [:create, :delete, :index]
->>>>>>> f94296d7ddecbf9f32276060cde4615174fc130c
   resources :customers, :only => [:create, :delete]
   get '/customers' => 'customers#dashboard', as: "customer_dashboard"
   #resources :contractors, :only => [:create, :delete]
