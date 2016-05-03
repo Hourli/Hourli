@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :job_requests do
     member do
-      get 'view_offers', to: 'job_requests#view_offers', as: 'view_offers'
+      get 'view_offers', to: 'job_offers#index', as: 'view_offers'
     end
   end
 

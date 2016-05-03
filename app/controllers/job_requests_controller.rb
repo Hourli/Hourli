@@ -101,14 +101,6 @@ end
     end
   end
 
-  def view_offers
-  end
-
-  def search
-      if params[:q].present? and params[:q] != ""
-          @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
-      end
-  end
 
 private
     def job_request_params

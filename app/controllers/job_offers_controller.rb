@@ -4,7 +4,10 @@ before_action :retrieve_job_offer, only: [:edit, :update, :destroy, :show]
 before_action :restrict_to_owner, only: [:edit, :update, :destroy]
 # GET /job_offers
 # GET /job_offers.json
+
 def index
+  #@job_offers = JobOffer.find_by(id: params[:id])
+  @job_offers = JobOffer.where("job_request_id = ?", params[:job_request])
 end
 
 # GET /job_offers/1
