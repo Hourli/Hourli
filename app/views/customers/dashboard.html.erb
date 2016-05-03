@@ -1,22 +1,38 @@
 <ul class="nav nav-tabs tabs-up" id="friends">
-      <li class="active"><a href="#" data-target="#requests" id="requests_tab" data-toggle="tabajax" rel="tooltip"> Job Requests </a></li>
+      <li class="active"><a href="#" data-target="#requests" id="requests_tab" data-toggle="tabajax" rel="tooltip"> Your Job Requests </a></li>
       <li><a href="#" data-target="#ongoing" id="ongoing_tab" data-toggle="tabajax" rel="tooltip"> Ongoing Jobs </a></li>
       <li><a href="#" data-target="#completed" id="completed_tab" data-toggle="tabajax" rel="tooltip"> Completed Jobs </a></li>
-
-
 </ul>
 
 <div class="tab-content">
 
   <div class="tab-pane fade-in active" id="requests">
 
+    <% @job_requests.each do |job_request| %>
+      <div class="container col-md-3">
+        <%= render partial: job_request, layout: false %>
+      </div>
+    <% end %>
+
   </div>
 
   <div class="tab-pane" id="ongoing">
 
+    <% @ongoing_jobs.each do |job| %>
+      <div class="container col-md-3">
+        <%= render partial: job, layout: false %>
+      </div>
+    <% end %> 
+
   </div>
 
   <div class="tab-pane" id="completed">
+
+    <% @completed_jobs.each do |job| %>
+      <div class="container col-md-3">
+        <%= render partial: job, layout: false %>
+      </div>
+    <% end %>
 
   </div>
 
@@ -24,51 +40,8 @@
 
 <script>
 
-    $(function(){
-
-          $('#requests').html(
-              "<%= j render partial: @job_requests %>"
-          );
-
-    });
-
     $('[data-toggle="tabajax"]').click(function(e) {
         var $this = $(this)
-        var targ = $this.attr('data-target');
-
-          $('ul.nav nav-tabs tabs-up li.active').removeClass('active');
-          $($this.attr('data-target')+ "_tab").addClass('active');
-
-        if(targ == '#requests'){
-
-          $(targ).html(
-            "<%= j render partial: @job_requests %>"
-          );
-
-        }
-        else if(targ == '#ongoing'){
-
-          $(targ).html(
-            <% if @ongoing_jobs != nil %>
-            "<%= j render partial: @ongoing_jobs %>"
-            <% else %>
-              "You have no ongoing jobs."
-            <% end %>
-          );
-
-        }
-        else if(targ == "#completed"){
-
-          $(targ).html(
-            <% if @completed_jobs != nil %>
-            "<%= j render partial: @ongoing_jobs %>"
-            <% else %>
-              "You have no ongoing jobs."
-            <% end %>
-          );
-
-        }
-
         $this.tab('show');
         return false;
     });
