@@ -34,9 +34,13 @@
       <p>
       <%= @job_request.categories %>
       </p>
-      
+      <%if JobRequest.find_by(id: params[:id]).customer == current_user.customer %>
       <%= link_to 'Edit', edit_job_request_path(@job_request),class: "btn btn-primary", id: "edit_job_request"%>
-      <%= link_to 'Delete', job_request_path(@job_request), :method => :delete, class: "btn btn-primary" , id: "delete_job_request"%>     
+      <%= link_to 'Delete', job_request_path(@job_request), :method => :delete, class: "btn btn-primary" , id: "delete_job_request"%> 
+      <% end %>
+      <%if current_user.role == 'contractor' %>
+      <%= link_to 'Make Job Offer', new_job_offer_path(:job_request => @job_request) , :method => :get, class: "btn btn-primary", id: "make_job_offer" %>    
+      <% end %>
       </div>
     </div>
   </div>
