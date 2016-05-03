@@ -79,11 +79,15 @@ def update
   end
 end
 
-def search
-  if params[:q].present?
-    @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
+  def search
+    if params[:q].present?
+      @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
+    end
   end
-end
+
+  def view_offers
+  end
+
 
 private
 def job_request_params
