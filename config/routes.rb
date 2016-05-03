@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   resources :job_requests
   resources :customers, :only => [:create, :delete]
-  get '/customer' => 'customers#dashboard', as: "customer_dashboard"
+  get '/customers' => 'customers#dashboard', as: "customer_dashboard"
   resources :contractors, :only => [:create, :delete]
   get '/contractor/edit' => 'contractors#edit', as: "edit_contractor"
   put '/contractor/update' => 'contractors#update', as: "update_contractor"
