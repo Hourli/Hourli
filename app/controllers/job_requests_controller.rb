@@ -1,5 +1,6 @@
 class JobRequestsController < ApplicationController
-
+before_action :retrieve_job_request, only: [:edit, :update, :destroy]
+before_action :restrict_to_owner, only: [:edit, :update, :destroy]
 	def index
 		
 	end
@@ -31,7 +32,6 @@ def edit
 		flash[:alert] = "You do not have permission to be here"
 		redirect_to customers_path
 	end
-
 end
 
 def show
@@ -43,11 +43,11 @@ def update
 	@job_request = JobRequest.find(params[:id])
 
 	     #authentication_before_action
-	     if @job_request.customer_id != current_user.customer.id
+	     # if @job_request.customer_id != current_user.customer.id
 
-	     	flash[:alert] = "You do not have permission to be here"
-	     	redirect_to customers_path
-	     else
+	     # 	flash[:alert] = "You do not have permission to be here"
+	     # 	redirect_to customers_path
+	     # else
 
 
 	     	@job_request.update_attributes(job_request_params)
@@ -59,7 +59,7 @@ def update
 	     		render :edit
 	     		puts @job_request.errors.full_messages
 	     	end
-	     end
+	     # end
 
 	 end
 
@@ -90,5 +90,18 @@ private
 def job_request_params
 	params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
 end
+ def restrict_to_owner
+    if @job_request.customer != current_user.customer
+      flash[:alert] = "You do not have permission to be here"
+      redirect_to customers_path
+    end
+  end
 
+  def retrieve_job_request
+    @job_request = JobRequest.find_by(id: params[:id])
+    if @job_request.nil?
+      flash[:alert] = "Invalid job offer id #{params[:id]}"
+      redirect_to customers_path
+    end
+  end
 end
