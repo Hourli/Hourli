@@ -1,0 +1,3 @@
+<% @job_offers.each do |job_offer| %>
+	<%=link_to "#{job_offer.title}", job_offer_path(job_offer) %><br>
+<%end%>
