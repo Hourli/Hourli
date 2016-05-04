@@ -22,7 +22,15 @@ Rails.application.routes.draw do
   end
 
   resources :job_requests
-  resources :job_offers
+
+####----Below is accepting job offer---
+  resources :job_offers do
+    member do
+      get 'accept', to: 'job_offers#accept', as: 'accept'
+    end
+  end
+
+
   #resources :customers
   resources :contractors, :only => [:create, :delete, :index]
   resources :customers, :only => [:create, :delete]

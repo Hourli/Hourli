@@ -1,9 +1,12 @@
 class JobOffersController < ApplicationController
-before_action :restrict_to_contractors, only: [:new, :create, :edit, :update, :destroy]
-before_action :retrieve_job_offer, only: [:edit, :update, :destroy, :show]
-before_action :restrict_to_owner, only: [:edit, :update, :destroy]
+  before_action :restrict_to_contractors, only: [:new, :create, :edit, :update, :destroy]
+  before_action :retrieve_job_offer, only: [:edit, :update, :destroy, :show]
+  before_action :restrict_to_owner, only: [:edit, :update, :destroy]
 # GET /job_offers
 # GET /job_offers.json
+
+def accept
+end
 
 def index
   #@job_offers = JobOffer.find_by(id: params[:id])
@@ -30,29 +33,29 @@ end
 def create
   @job_offer=JobOffer.new(job_offer_params)
 # current_user.job_requests.new
-  if @job_offer.valid?
-    flash[:notice] = "A new job offer was successfully created"
-    @job_offer.contractor = current_user.contractor
-    @job_offer.job_request = JobRequest.find(params[:job_request])
-    @job_offer.save
-    redirect_to @job_offer
-  else
-    render :new
-    puts @job_offer.errors.full_messages
-  end
+if @job_offer.valid?
+  flash[:notice] = "A new job offer was successfully created"
+  @job_offer.contractor = current_user.contractor
+  @job_offer.job_request = JobRequest.find(params[:job_request])
+  @job_offer.save
+  redirect_to @job_offer
+else
+  render :new
+  puts @job_offer.errors.full_messages
+end
 
 end
 
 def update
   @job_offer.update_attributes(job_offer_params)
   if @job_offer.valid?
-          flash[:notice] = "The job offer was successfully updated"
-          @job_offer.save
-          redirect_to job_offer_path(@job_offer)
-        else
-          render :edit
-          puts @job_offer.errors.full_messages
-        end
+    flash[:notice] = "The job offer was successfully updated"
+    @job_offer.save
+    redirect_to job_offer_path(@job_offer)
+  else
+    render :edit
+    puts @job_offer.errors.full_messages
+  end
 end
 
 # DELETE /job_offers/1
