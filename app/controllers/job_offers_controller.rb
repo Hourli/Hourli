@@ -2,6 +2,7 @@ class JobOffersController < ApplicationController
 before_action :restrict_to_contractors, only: [:new, :create, :edit, :update, :destroy]
 before_action :retrieve_job_offer, only: [:edit, :update, :destroy, :show]
 before_action :restrict_to_owner, only: [:edit, :update, :destroy]
+#before_action :restrict_to_the_customer, only: [:accept]
 # GET /job_offers
 # GET /job_offers.json
 def index
@@ -57,6 +58,28 @@ end
 def destroy
   @job_offer.destroy
   redirect_to :root
+end
+
+def accept
+    @job_offer = JobOffer.find_by(id: params[:id])
+    #use job request's name     description   location   start_date??  end_date??      contractor that the offer belongs to
+    #the job belongs to the contractor and the customer
+    @job_request = @job_offer.job_request
+    @job=Job.create(name: @job_request[:name], description: @job_request[:description], location: @job_request[:location], start_date: @job_request[:start_date], end_date: @job_request[:end_date], contractor: @job_offer.contractor)
+    @job.customer=current_user.customer
+    @job.save
+
+    #delete the job request and all the job offers that belong to the job request
+    JobOffer.where(job_request: @job_request).each { |offer|
+        offer.destroy
+    } 
+    @job_request.destroy
+    
+
+    #send a message to both the customer and the chosen contractor
+    flash[:notice]= "You have accepted the job offer, the job is generated."
+    redirect_to :root
+   
 end
 
 private
