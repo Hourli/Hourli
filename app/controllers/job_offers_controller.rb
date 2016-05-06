@@ -2,7 +2,7 @@ class JobOffersController < ApplicationController
   before_action :restrict_to_contractors, only: [:new, :create, :edit, :update, :destroy]
   before_action :retrieve_job_offer, only: [:edit, :update, :destroy, :show]
   before_action :restrict_to_owner, only: [:edit, :update, :destroy]
-#before_action :restrict_to_the_customer, only: [:accept]
+#  before_action :restrict_to_the_customer_and_contractor, only: [:accept]
 # GET /job_offers
 # GET /job_offers.json
 
@@ -71,9 +71,15 @@ def accept
     #use job request's name     description   location   start_date??  end_date??      contractor that the offer belongs to
     #the job belongs to the contractor and the customer
     @job_request = @job_offer.job_request
-    @job=Job.create(name: @job_request[:name], description: @job_request[:description], location: @job_request[:location], start_date: @job_request[:start_date], end_date: @job_request[:end_date], contractor: @job_offer.contractor)
+    @job=Job.create(name: @job_request[:title], description: @job_request[:description], location: @job_request[:location], start_date: @job_request[:start_date], end_date: @job_request[:end_date], completed: false)
     @job.customer=current_user.customer
+    @job.contractor=@job_offer.contractor
+
     @job.save
+    #puts "@@@@@@@@@@@"
+    #puts @job.errors.full_messages
+    #puts Job.find_by(name: @job_request[:title])
+    #puts "########"
 
     #delete the job request and all the job offers that belong to the job request
     JobOffer.where(job_request: @job_request).each { |offer|
@@ -83,7 +89,7 @@ def accept
     
 
     #send a message to both the customer and the chosen contractor
-    flash[:notice]= "You have accepted the job offer, the job is generated."
+    flash[:notice]= "You have accepted the job offer, job #{@job.name} is generated."
     redirect_to :root
    
 end

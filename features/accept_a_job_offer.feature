@@ -23,7 +23,8 @@ Background: job request in database
   Scenario: accept a job offer
     Given I go to the "job offer 'I am carpenter'" page
     And I press "accept_job_offer"
-
+    Then I am on the "customer_dashboard" page
+    And I should see "You have accepted the job offer, job carpenter is generated." 
 
 
   
