@@ -54,7 +54,9 @@
 
       <%= link_to 'Delete', job_request_path(@job_request), :method => :delete, class: "btn btn-primary" , id: "delete_job_request"%>
 
-      <%= link_to 'View Job Offers', job_offers_path(@job_request),class: "btn btn-info", id: "view_offers_job_request"%>
+      <%= link_to 'View Job Offers', job_offers_path(:job_request => @job_request),class: "btn btn-info", id: "view_offers_job_request"%>
+
+
  
       <% end %>
       <%if current_user.role == 'contractor' %>
