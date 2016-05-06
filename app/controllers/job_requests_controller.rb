@@ -66,11 +66,29 @@ class JobRequestsController < ApplicationController
         
     end
 
-    def search
-        if params[:q].present? and params[:q] != ""
-            @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
-        end
+ def destroy
+    @job_request = JobRequest.find(params[:id])
+
+  #authentication_before_action
+  if @job_request.customer_id != current_user.customer.id
+
+    flash[:alert] = "You do not have permission to be here"
+    redirect_to customers_path
+  else
+
+
+    @job_request.destroy
+    flash[:notice] = "The job request was successfully deleted."
+    redirect_to job_requests_path
+  end
+end
+
+  def search
+    if params[:q].present?
+      @job_requests = JobRequest.search(params[:q]).page(params[:page]).records
     end
+  end
+
 
 private
     def job_request_params
