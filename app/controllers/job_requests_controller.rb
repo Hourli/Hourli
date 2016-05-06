@@ -27,11 +27,6 @@ class JobRequestsController < ApplicationController
     end
 
     def edit  
-        @job_request = JobRequest.find(params[:id])
-        if @job_request.customer_id != current_user.customer.id
-            flash[:alert] = "You do not have permission to be here"
-            redirect_to customers_path
-        end
 
     end
 
@@ -45,15 +40,11 @@ class JobRequestsController < ApplicationController
         #     flash[:alert] = "You do not have permission to be here"
         # 	  redirect_to customers_path
         # else
-        @job_request = JobRequest.find(params[:id])
+       
 
         #authentication_before_action
-        if @job_request.customer_id != current_user.customer.id
-            flash[:alert] = "You do not have permission to be here"
-     	    redirect_to customers_path
-        else
-            @job_request.update_attributes(job_request_params)
-     	end
+        @job_request.update_attributes(job_request_params)
+     
         if @job_request.valid?
      		flash[:notice] = "The job request was successfully updated."
      		@job_request.save
@@ -65,17 +56,14 @@ class JobRequestsController < ApplicationController
     end
 
     def destroy
-        @job_request = JobRequest.find(params[:id])
+        
 
     #authentication_before_action
-        if @job_request.customer_id != current_user.customer.id
-            flash[:alert] = "You do not have permission to be here"
-	        redirect_to customers_path
-        else
+
 	        @job_request.destroy
 	        flash[:notice] = "The job request was successfully deleted."
 	        redirect_to job_requests_path
-        end
+        
     end
 
  def destroy
@@ -104,17 +92,17 @@ end
 
 private
     def job_request_params
-        params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :categories)
+        params.require(:job_request).permit(:title, :description, :location, :hourly_rate, :start_date, :end_date, :categories)
     end
     def restrict_to_owner
-        if @job_request.customer != current_user.customer
+        if @job_request.customer_id != current_user.customer.id
             flash[:alert] = "You do not have permission to be here"
             redirect_to customers_path
         end
     end
 
     def retrieve_job_request
-        @job_request = JobRequest.find_by(id: params[:id])
+        @job_request = JobRequest.find(params[:id])
         if @job_request.nil?
             flash[:alert] = "Invalid job offer id #{params[:id]}"
             redirect_to customers_path

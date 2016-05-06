@@ -35,6 +35,62 @@ RSpec.describe JobOffersController, type: :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # JobOffersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+  render_views
+    before(:each) do
+        @user = FactoryGirl.create(:user)
+        @user.confirmed_at = Time.now
+        @user.save!
+        sign_in :user, @user
+
+        
+    end
+
+  describe "POST #accept" do
+  before do
+    #  @contractor_user= FactoryGirl.create(:contractor_user)
+      @job_request = FactoryGirl.create(:job_request)
+      @job_offer = FactoryGirl.create(:job_offer)
+      @job_offer.job_request=@job_request
+
+
+      job_offer_2_attrs=FactoryGirl.attributes_for :job_offer
+      job_offer_2_attrs["title"] = "recorder"
+      job_offer_2_attrs["description"]="multiple sentences."
+      job_offer_2_attrs["hourly_rate"] = 31.2
+      job_offer_2_attrs["contractor_id"]=2
+      @job_offer_2 = FactoryGirl.create(:job_offer, job_offer_2_attrs)
+      @job_offer_2.job_request=@job_request
+
+    #  @job_offer.contractor=@contractor_user
+    end
+    it "should create a new job in the database, and has the same title as the corresponding job request " do
+      post :accept, :id => @job_offer.id
+
+      #puts "****************"
+      #puts @job_request[:title]
+      #puts "$$$$$$$$$$$$$$$$$"
+
+      expect(Job.find_by(name: @job_request[:title])).not_to be_nil
+    end
+
+    it "should delete all the job offers of the corresponding job request " do
+        post :accept, :id => @job_offer.id
+        
+        expect(JobOffer.exists?(@job_offer_2.id)).to be_falsy
+        
+    end
+
+    it "should delete the corresponding job request " do
+        post :accept, :id => @job_offer.id
+        expect(JobRequest.exists?(@job_request.id)).to be_falsy
+    end
+
+    it "should display a notice message, and go back to the home page" do
+       post :accept, :id => @job_offer.id
+       expect(flash[:notice]).to eq("You have accepted the job offer, job #{@job_request[:title]} is generated.")
+       expect(response).to redirect_to(root_path)
+    end
+  end
 
   
 end
