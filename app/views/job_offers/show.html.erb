@@ -20,9 +20,14 @@
       <br>
       <br>
       <%if JobOffer.find_by(id: params[:id]).contractor == current_user.contractor %>
-        <%= link_to 'Edit', edit_job_offer_path(@job_offer),class: "btn btn-primary", id: "edit_job_offer"%>
-        <%= link_to 'Delete', job_offer_path(@job_offer), :method => :delete, class: "btn btn-primary" , id: "delete_job_offer"%>  
+        <%= link_to 'Edit', edit_job_offer_path(@job_offer), class: "btn btn-primary", id: "edit_job_offer"%>
+        <%= link_to 'Delete', job_offer_path(@job_offer), :method => :delete, class: "btn btn-primary" , id: "delete_job_offer"%>
       <% end %>
+
+      <%if JobRequest.find_by(id: @job_offer.job_request).customer == current_user.customer %>
+        <%= link_to 'Accept', accept_job_offer_path(@job_offer), :method => :post, class: "btn btn-primary" , id: "accept_job_offer"%>  
+       <% end %>
+
       </div>
     </div>
   </div>

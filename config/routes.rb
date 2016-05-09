@@ -11,11 +11,27 @@ Rails.application.routes.draw do
   get '/change_role', to: 'change_roles#change_role'
 
   get '/job_requests/search' => 'job_requests#search', as: "search_job_requests"
+  #post '/job_offers/:id/accept'  =>  'job_offers#accept', as: "accept_job_offer"
   resources :jobs do
     resources :tasks, except: [:show, :index]
   end
+
+  resources :job_requests do
+    member do
+      get 'view_offers', to: 'job_offers#index', as: 'view_offers'
+    end
+  end
+
   resources :job_requests
-  resources :job_offers
+
+####----Below is accepting job offer---
+  resources :job_offers do
+    member do
+      post 'accept', to: 'job_offers#accept', as: 'accept'
+    end
+  end
+
+
   #resources :customers
   resources :contractors, :only => [:create, :delete, :index]
   resources :customers, :only => [:create, :delete]
