@@ -16,6 +16,10 @@ An app for independent contractors or anyone that charges an hourly fee for thei
 4. Run `bundle exec rake db:test:prepare`
 5. Install elasticsearch (via brew or apt-get or however you do it on windows)
 6. Run `bundle exec rake environment elasticsearch:import:model CLASS='JobRequest'` to prepare elastic search
+7. Run `elasticsearch`
+8. Run rails console -> type `JobRequest.__elasticsearch__.create_index! force:true`
+9. ctr+c every server you ran.
+10. rerun `elasticsearch` then rerun `rails server`
 
 # General development
 *Note:* During development, any emails that are sent by devise are dumped to the server console. Make sure to check here for email confirmation links, etc.
