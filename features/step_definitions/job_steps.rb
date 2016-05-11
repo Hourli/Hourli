@@ -35,6 +35,11 @@ And /^the job named "([^"]*)" should be under "([^"]*)"$/ do |job_name, tab_name
     when "Ongoing Jobs"
       assert_selector('#ongoing', text: job_name)
     when "Completed Jobs"
-      assert_selector('#completed', text: job_name) 
+      assert_selector('#completed', text: job_name)
+    when "Ongoing_Jobs"
+      assert_selector('#ongoing_jobs', text: job_name)
+    when "Completed_Jobs"
+      assert_selector('#completed_jobs', text: job_name)
+    
   end
 end
