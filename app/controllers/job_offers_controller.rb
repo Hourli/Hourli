@@ -55,7 +55,6 @@ def update
     redirect_to job_offer_path(@job_offer)
   else
     render :edit
-    puts @job_offer.errors.full_messages
   end
 end
 

@@ -36,35 +36,35 @@ RSpec.describe JobOffersController, type: :controller do
   # JobOffersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
   render_views
-    before(:each) do
-        @user = FactoryGirl.create(:user)
-        @user.confirmed_at = Time.now
-        @user.save!
-        sign_in :user, @user
+  before(:each) do
+    @user = FactoryGirl.create(:user, role: "both")
+    @user.confirmed_at = Time.now
+    @user.save!
+    sign_in :user, @user
 
-        
-    end
+
+  end
 
   describe "POST #accept" do
-  before do
+    before do
     #  @contractor_user= FactoryGirl.create(:contractor_user)
-      @job_request = FactoryGirl.create(:job_request)
-      @job_offer = FactoryGirl.create(:job_offer)
-      @job_offer.job_request=@job_request
+    @job_request = FactoryGirl.create(:job_request)
+    @job_offer = FactoryGirl.create(:job_offer)
+    @job_offer.job_request=@job_request
 
 
-      job_offer_2_attrs=FactoryGirl.attributes_for :job_offer
-      job_offer_2_attrs["title"] = "recorder"
-      job_offer_2_attrs["description"]="multiple sentences."
-      job_offer_2_attrs["hourly_rate"] = 31.2
-      job_offer_2_attrs["contractor_id"]=2
-      @job_offer_2 = FactoryGirl.create(:job_offer, job_offer_2_attrs)
-      @job_offer_2.job_request=@job_request
+    job_offer_2_attrs=FactoryGirl.attributes_for :job_offer
+    job_offer_2_attrs["title"] = "recorder"
+    job_offer_2_attrs["description"]="multiple sentences."
+    job_offer_2_attrs["hourly_rate"] = 31.2
+    job_offer_2_attrs["contractor_id"]=2
+    @job_offer_2 = FactoryGirl.create(:job_offer, job_offer_2_attrs)
+    @job_offer_2.job_request=@job_request
 
     #  @job_offer.contractor=@contractor_user
-    end
-    it "should create a new job in the database, and has the same title as the corresponding job request " do
-      post :accept, :id => @job_offer.id
+  end
+  it "should create a new job in the database, and has the same title as the corresponding job request " do
+    post :accept, :id => @job_offer.id
 
       #puts "****************"
       #puts @job_request[:title]
@@ -74,23 +74,102 @@ RSpec.describe JobOffersController, type: :controller do
     end
 
     it "should delete all the job offers of the corresponding job request " do
-        post :accept, :id => @job_offer.id
-        
-        expect(JobOffer.exists?(@job_offer_2.id)).to be_falsy
-        
+      post :accept, :id => @job_offer.id
+
+      expect(JobOffer.exists?(@job_offer_2.id)).to be_falsy
+
     end
 
     it "should delete the corresponding job request " do
-        post :accept, :id => @job_offer.id
-        expect(JobRequest.exists?(@job_request.id)).to be_falsy
+      post :accept, :id => @job_offer.id
+      expect(JobRequest.exists?(@job_request.id)).to be_falsy
     end
 
     it "should display a notice message, and go back to the home page" do
-       post :accept, :id => @job_offer.id
-       expect(flash[:notice]).to eq("You have accepted the job offer, job #{@job_request[:title]} is generated.")
-       expect(response).to redirect_to(root_path)
+     post :accept, :id => @job_offer.id
+     expect(flash[:notice]).to eq("You have accepted the job offer, job #{@job_request[:title]} is generated.")
+     expect(response).to redirect_to(root_path)
+   end
+ end
+
+ describe "POST #create" do
+  before do
+    @job_request = FactoryGirl.create(:job_request)
+    @user.role = "contractor"
+    @user.save!
+  end
+  it "should create a job offer in the database" do
+    @job_offer_attributes = FactoryGirl.attributes_for :job_offer
+    post :create, {job_offer: @job_offer_attributes, job_request: @job_request.id}
+    expect(JobOffer.find_by_title(@job_offer_attributes[:title])).not_to be_nil
+    expect(flash[:notice]).to eq("A new job offer was successfully created")
+    expect(response).to redirect_to job_offer_path(JobOffer.find_by_title(@job_offer_attributes[:title]))
+  end
+  it "shouldn't create a new job offer in the database, and errors for blank fields should be displayed" do
+    post :create, :job_offer => {:title => '', :description => '', :hourly_rate=> ''}
+    errorArray = ["Title can't be blank", "Description can't be blank", "Hourly rate can't be blank"]
+    expect(assigns[:job_offer].valid?).to eq(false)
+    expect(assigns[:job_offer].errors.full_messages).to match_array(errorArray)
+    expect(response).to render_template(:new)
+  end 
+end
+
+  describe "GET #show" do
+    before do
+      @job_request = FactoryGirl.create(:job_request)
+      @job_offer = FactoryGirl.create(:job_offer)
+      @job_offer.job_request=@job_request
+    end
+    it "should display the job offer attributes" do
+      get :show, {:id => @job_offer.id}
+      expect(assigns[:job_offer].title).to eq(@job_offer.title)
+      expect(assigns[:job_offer].description).to eq(@job_offer.description)
+      expect(assigns[:job_offer].hourly_rate).to eq(@job_offer.hourly_rate)
     end
   end
 
-  
+  describe "DELETE #destroy" do
+    before do
+      @job_request = FactoryGirl.create(:job_request)
+      @job_offer = FactoryGirl.create(:job_offer)
+      @job_offer.job_request=@job_request
+      @user.role = "contractor"
+      @user.save!
+    end
+    it "should delete a job offer with the given id in the database, display a flash message, and redirect to the index page" do
+        delete :destroy, :id => @job_offer.id
+        expect(JobOffer.exists?(@job_offer.id)).to be_falsy
+        expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe "PATCH #update" do
+    before do
+      @job_request = FactoryGirl.create(:job_request)
+      @job_offer = FactoryGirl.create(:job_offer)
+      @job_offer.job_request=@job_request
+      @user.role = "contractor"
+      @user.save!
+    end
+    it "should update an attribute for an existing object" do
+        patch :update, :id => @job_offer.id, :job_offer => {:description => "New description"}
+        expect(JobOffer.find(@job_offer.id).description).to eq("New description")
+        expect(response).to redirect_to(job_offer_path(@job_request))
+    end
+  end
+  describe "GET #edit" do
+    before do
+      @job_request = FactoryGirl.create(:job_request)
+      @job_offer = FactoryGirl.create(:job_offer)
+      @job_offer.job_request=@job_request
+      @user.role = "contractor"
+      @user.save!
+    end
+    it "should render the edit page" do
+      get :edit, :id => @job_request.id
+      expect(response).to render_template(:edit)
+      expect(response.body).to include(@job_offer[:title])
+    end
+
+  end
 end
