@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe JobsController, type: :controller do
   render_views
     before(:each) do
-        @user = FactoryGirl.create(:user)
+        @user = @user = FactoryGirl.create(:user, role: 'both')
         @user.confirmed_at = Time.now
         @user.save!
         sign_in :user, @user
@@ -14,19 +14,13 @@ RSpec.describe JobsController, type: :controller do
     describe "GET #index" do
       
      before(:each) do
-       job_1_attrs = FactoryGirl.attributes_for :job
-      
-       job_1_attrs["name"] = 'Electric - Martino Way'
-       job_1_attrs["description"] = 'Replace ceiling fans in bedrooms'
-       job_1_attrs["location"] = '16 Martino Way, Pomona NY, 10970'
-       job_1_attrs["start_date"] = '2015-05-05'
-       job_1_attrs["end_date"] = '2015-05-10'
-       job_1_attrs["contractor"] = @user.contractor
-       @job_1 = FactoryGirl.create(:job, job_1_attrs)
+       
+       @job_2 = FactoryGirl.create(:job, name: 'Electric - Martino Way',description: 'Replace ceiling fans in bedrooms',
+       location: '16 Martino Way, Pomona NY, 10970',start_date: '2015-05-05', end_date: '2015-05-10', contractor: @user.contractor)
        get :index
      end
-      it "should create a job and show it in the @jobs array", pending: true do
-       expect(assigns[:jobs]).to match_array([@job_1])
+      it "should create a job and show it in the @jobs array" do
+       expect(assigns[:jobs]).to match_array([@job_2])
       end
     end
     
