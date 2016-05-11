@@ -3,7 +3,8 @@ class JobsController < ApplicationController
   def index
     #@jobs = Job.all
     @jobs = current_user.contractor.jobs.all
-    #@completed_jobs = Job.all.where(ongoing: false)
+    @completed_jobs = current_user.contractor.jobs.where(completed: false)
+    @ongoing_jobs = current_user.contractor.jobs.where(completed: true)
   end
 
   def new
