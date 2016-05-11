@@ -14,7 +14,7 @@ RSpec.describe JobsController, type: :controller do
   describe "GET #index" do
 
     before(:each) do
-<<<<<<< HEAD
+
         @user = @user = FactoryGirl.create(:user, role: 'both')
         @user.confirmed_at = Time.now
         @user.save!
@@ -33,7 +33,7 @@ RSpec.describe JobsController, type: :controller do
       it "should create a job and show it in the @jobs array" do
        expect(assigns[:jobs]).to match_array([@job_2])
       end
-=======
+
       job_1_attrs = FactoryGirl.attributes_for :job
 
       job_1_attrs["name"] = 'Electric - Martino Way'
@@ -47,7 +47,7 @@ RSpec.describe JobsController, type: :controller do
     end
     it "should create a job and show it in the @jobs array", pending: true do
       expect(assigns[:jobs]).to match_array([@job_1])
->>>>>>> fbd6d19f03fddaacd7e6167eda0e4f5fb478b1e6
+
     end
   end
 
