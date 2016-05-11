@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br><br><br>
+      <div class="text-center">
+      <h2>
+      <%= @job_offer.title%>
+      </h2>
+      <h4>
+      Description
+      </h4>
+      <p> 
+      <%= @job_offer.description %>
+      <br>
+      <h4>
+      Hourly Rate
+      </h4>
+      <p>
+      <%= @job_offer.hourly_rate %>
+      <br>
+      <br>
+      <%if JobOffer.find_by(id: params[:id]).contractor == current_user.contractor %>
+        <%= link_to 'Edit', edit_job_offer_path(@job_offer), class: "btn btn-primary", id: "edit_job_offer"%>
+        <%= link_to 'Delete', job_offer_path(@job_offer), :method => :delete, class: "btn btn-primary" , id: "delete_job_offer"%>
+      <% end %>
+
+      <%if JobRequest.find_by(id: @job_offer.job_request).customer == current_user.customer %>
+        <%= link_to 'Accept', accept_job_offer_path(@job_offer), :method => :post, class: "btn btn-primary" , id: "accept_job_offer"%>  
+       <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

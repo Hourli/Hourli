@@ -2,6 +2,10 @@ def create_unconfirmed_user_account(role='customer')
   @user = FactoryGirl.create(:user, role: role)
 end
 
+def create_other_user_account(role='customer')
+  @other_user = FactoryGirl.create(:user, role: role, email: "other_account@email.com")
+end
+
 def create_confirmed_user_account(role='customer')
   create_unconfirmed_user_account(role)
   confirm_user_account
@@ -14,6 +18,10 @@ def confirm_user_account
 
   @user.confirmed_at = Time.now
   @user.save!
+  if @other_user != nil 
+    @other_user.confirmed_at = Time.now
+    @other_user.save!
+  end
 end
 
 def destroy_user_account
@@ -31,6 +39,10 @@ end
 
 def logout
   visit(destroy_user_session_path)
+end
+
+Given(/^there is another "([^"]*)" account$/) do |role|
+  create_other_user_account(role)
 end
 
 Given(/^I am logged in$/)do

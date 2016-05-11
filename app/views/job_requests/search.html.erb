@@ -1,0 +1,20 @@
+<div class="container">
+   <div class="row">
+      <div class="col-sm-12">
+        <br>
+        <h2> Searching job requests for: <%= params[:q] %> </h2>
+        <ul class="list-group">
+            <% @job_requests.each do |job_request| %>
+            <li class="list-group-item">
+                <p><%= job_request.title %></p>
+                <p><%= job_request.description %></p>
+                <p><%= job_request.location %></p>
+            </li>
+            <% end %>
+        </ul>
+        <div class = 'text-center'>
+        <%= paginate @job_requests %>
+        </div>
+    </div>
+</div>
+</div>

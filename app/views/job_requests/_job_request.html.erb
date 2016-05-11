@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"> <%=link_to "#{job_request.title}", job_request_path(job_request.id), class: "btn btn-default"%></h3>
+  </div>
+  <div class="panel-body ">
+    <b>Description:</b> <%= job_request.description %>
+    <br>
+    <b>Location:</b> <%= job_request.location %>
+    <br>
+    <b>Rate: </b> <%= job_request.hourly_rate %>
+    <br>
+    <b>Categories: </b> <%= job_request.categories %>
+    <br><br>
+    <%= link_to 'View Job Offers', job_offers_path(:job_request => job_request),class: "btn btn-info", id: "view_offers_job_request"%>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 col-sm-offset-4">
+      <br><br>
+      <h1>Edit Task</h1>
+      <br>
+      <%= bootstrap_form_for([@job, @task], label_errors: true) do |f| %>
+          <%= f.text_field :title %>
+          <%= f.text_area :description %>
+          <%= f.number_field :duration, label: 'Duration (in minutes)' %>
+          <%= f.form_group :completed do %>
+              <%= f.check_box :completed, label: "Check this box if the task is completed"%>
+          <% end %>
+          <%= f.submit 'Update Task', class: 'btn btn-primary', id: 'update_task' %>
+      <% end %>
+
+      <br>
+      <%= link_to 'Delete Task', job_task_path(@job.id, @task.id), method: :delete, class: 'btn btn-xs btn-danger', id: 'delete_task', data: { confirm: 'Are you sure?' } %>
+
+    </div>
+  </div>
+</div>

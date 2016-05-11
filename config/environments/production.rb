@@ -90,5 +90,8 @@ Rails.application.configure do
 
   # 1 minute
   config.x.poll_interval = 60000
+  
+  Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['SEARCHBOX_SSL_URL']
+
 
 end
