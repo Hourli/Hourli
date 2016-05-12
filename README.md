@@ -1,4 +1,4 @@
-# Hourli
+# Hourli [![Code Climate](https://codeclimate.com/github/Hourli/Hourli/badges/gpa.svg)](https://codeclimate.com/github/Hourli/Hourli)
 
 Dev: [![Build Status](https://travis-ci.org/Hourli/Hourli.svg?branch=dev)](https://travis-ci.org/Hourli/Hourli)
 
@@ -6,6 +6,7 @@ Prod: [![Build Status](https://travis-ci.org/Hourli/Hourli.svg?branch=master)](h
 
 Check out http://www.agileventures.org/projects/hourli for more details
 
+Both Heroku apps below are running the same code, it is recommended to use hourli.herokuapp.com
 # Production URL
 * https://hourli.herokuapp.com/
 
