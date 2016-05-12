@@ -1,17 +1,17 @@
 <%= form_for(@job_offer) do |f| %>
-  <% if @job_offer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@job_offer.errors.count, "error") %> prohibited this job_offer from being saved:</h2>
+    <% if @job_offer.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@job_offer.errors.count, "error") %> prohibited this job_offer from being saved:</h2>
 
-      <ul>
-      <% @job_offer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @job_offer.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

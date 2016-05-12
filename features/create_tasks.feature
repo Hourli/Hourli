@@ -8,7 +8,7 @@ Feature: Create tasks for a job
     And I am currently viewing as a "contractor"
     And I login with valid credentials
     And the following job exists:
-      | name  | description | location    | start_date | end_date |
+      | name                   | description                      | location                         | start_date | end_date   |
       | Electric - Martino Way | Replace ceiling fans in bedrooms | 16 Martino Way, Pomona NY, 10970 | 2015-05-05 | 2015-05-10 |
 
   Scenario: Navigate to new task page (for a specific job)

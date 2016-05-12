@@ -2,6 +2,7 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   margin-bottom: 60px;
 }
@@ -14,7 +15,7 @@ body {
   border: 1px solid #e7e7e7;
 }
 
-.breadcrumb-footer{
+.breadcrumb-footer {
   margin: 0 auto;
 }
 
@@ -24,61 +25,61 @@ body {
   }
 }
 
-.noty_type_notice{
+.noty_type_notice {
   @extend .alert-info;
 }
 
-.noty_type_alert{
+.noty_type_alert {
   @extend .alert-danger;
 }
 
-.noty_type_error{
+.noty_type_error {
   @extend .alert-danger;
 }
 
-.text-small{
+.text-small {
   font-size: 13px;
   line-height: 1.4em;
 }
 
-.btn-back{
-    background-color: #555555;
-    color:white;
+.btn-back {
+  background-color: #555555;
+  color: white;
 }
 
-.all-messages{
+.all-messages {
   font-weight: 400 !important;
   color: #337ab7 !important;
   box-shadow: none !important;
 }
 
-.read-message{
+.read-message {
   background: #f0f0f0;
-  .fa.fa-check{
+  .fa.fa-check {
     color: #bababa;
   }
 }
 
-.fa.fa-check:hover{
+.fa.fa-check:hover {
   color: black;
 }
 
-.fa.fa-trash{
+.fa.fa-trash {
   color: indianred;
-  &:hover{
-  color: darkred;
+  &:hover {
+    color: darkred;
   }
 }
 
-.navbar-dropdown{
+.navbar-dropdown {
   padding-top: 0px;
   padding-bottom: 0px;
 }
 
-.fa-check-square{
+.fa-check-square {
   color: green;
 }
 
-.fa-times{
+.fa-times {
   color: red;
 }

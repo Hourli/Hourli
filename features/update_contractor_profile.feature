@@ -5,8 +5,8 @@ Feature: Update a contractor profile
 
   Background: The user exists in the database and we are logged in
     Given the following user exists:
-      | first_name | last_name | email | password | role |
-      | test | test | testuser@email.com | oldpass123 | customer |
+      | first_name | last_name | email              | password   | role     |
+      | test       | test      | testuser@email.com | oldpass123 | customer |
     And I am logged in with email "testuser@email.com" and password "oldpass123"
     And the user with email "testuser@email.com" has a contractor account
 

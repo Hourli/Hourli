@@ -11,7 +11,7 @@
           <%= f.date_field :start_date %>
           <%= f.date_field :end_date %>
           <%= f.form_group :ongoing do %>
-              <%= f.check_box :completed, label: "Check this box if the job is completed"%>
+              <%= f.check_box :completed, label: "Check this box if the job is completed" %>
           <% end %>
           <%= f.submit "Submit Job Changes", id: "editjob", class: "btn btn-primary" %>
       <% end %>

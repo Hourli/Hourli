@@ -1,85 +1,88 @@
 <div class="container">
-   <div class="row">
-      <div class="col-sm-12">
-         <div class="text-center">
-            <%= bootstrap_form_tag(label_errors: true, url: search_job_requests_path, :method=>:get) do |f| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="text-center">
+        <%= bootstrap_form_tag(label_errors: true, url: search_job_requests_path, :method => :get) do |f| %>
             <%= f.text_field :q, label: "Search Job Requests", id: "search_job_request_field", autofocus: true, required: true %>
             <%= f.submit "Search", class: "btn btn-primary", id: "search_job_requests" %>
-            <% end %>
-         </div>
-         <br><br><br>
-        
-         <ul class="nav nav-tabs tabs-up" id="friends">
-            <li class="active"><a href="#" data-target="#ongoing_jobs" id="ongoing_jobs_tab" data-toggle="tabajax" rel="tooltip"> Ongoing Jobs </a></li>
-            <li><a href="#" data-target="#completed_jobs" id="completed_jobs_tab" data-toggle="tabajax" rel="tooltip"> Completed Jobs </a></li>
-         </ul>
-         <div class="tab-content">
-            <div class="tab-pane fade-in active" id="ongoing_jobs">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-sm-12">
-                        <table class = "table table-striped">
-                           <caption>Click on a job name to view or edit it</caption>
-                           <thead>
-                              <tr>
-                                 <th>Job Name</th>
-                                 <th>Location</th>
-                                 <th>Description</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <% @completed_jobs.each do |job| %>
-                              <tr>
-                                 <td><%=link_to "#{job.name}", job_path(job.id), id: "job_#{job.id}" %></td>
-                                 <td><%=job.location%></td>
-                                 <td><%=job.description%></td>
-                              </tr>
-                              <% end %>
-                           </tbody>
-                        </table>
-                        <%= link_to 'Create a job', new_job_path %>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="tab-pane" id="completed_jobs">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-sm-12">
-                        <table class = "table table-striped">
-                           <caption>Click on a job name to view or edit it222</caption>
-                           <thead>
-                              <tr>
-                                 <th>Job Name</th>
-                                 <th>Location</th>
-                                 <th>Description</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <% @ongoing_jobs.each do |job| %>
-                              <tr>
-                                 <td><%=link_to "#{job.name}", job_path(job.id), id: "job_#{job.id}" %></td>
-                                 <td><%=job.location%></td>
-                                 <td><%=job.description%></td>
-                              </tr>
-                              <% end %>
-                           </tbody>
-                        </table>
-                        <%= link_to 'Create a job', new_job_path %>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+        <% end %>
       </div>
-   </div>
+      <br><br><br>
+
+      <ul class="nav nav-tabs tabs-up" id="friends">
+        <li class="active">
+          <a href="#" data-target="#ongoing_jobs" id="ongoing_jobs_tab" data-toggle="tabajax" rel="tooltip"> Ongoing
+            Jobs </a></li>
+        <li><a href="#" data-target="#completed_jobs" id="completed_jobs_tab" data-toggle="tabajax" rel="tooltip">
+          Completed Jobs </a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade-in active" id="ongoing_jobs">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-striped">
+                  <caption>Click on a job name to view or edit it</caption>
+                  <thead>
+                  <tr>
+                    <th>Job Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @completed_jobs.each do |job| %>
+                      <tr>
+                        <td><%= link_to "#{job.name}", job_path(job.id), id: "job_#{job.id}" %></td>
+                        <td><%= job.location %></td>
+                        <td><%= job.description %></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <%= link_to 'Create a job', new_job_path %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="completed_jobs">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-striped">
+                  <caption>Click on a job name to view or edit it222</caption>
+                  <thead>
+                  <tr>
+                    <th>Job Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @ongoing_jobs.each do |job| %>
+                      <tr>
+                        <td><%= link_to "#{job.name}", job_path(job.id), id: "job_#{job.id}" %></td>
+                        <td><%= job.location %></td>
+                        <td><%= job.description %></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <%= link_to 'Create a job', new_job_path %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
-   $('[data-toggle="tabajax"]').click(function(e) {
-       var $this = $(this)
-       $this.tab('show');
-       return false;
-   });
-   
+  $('[data-toggle="tabajax"]').click(function (e) {
+    var $this = $(this);
+    $this.tab('show');
+    return false;
+  });
+
 </script>
 

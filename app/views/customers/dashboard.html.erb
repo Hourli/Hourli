@@ -2,61 +2,66 @@
 
   <div class="row">
 
-<ul class="nav nav-tabs tabs-up" id="friends">
-      <li class="active"><a href="#" data-target="#requests" id="requests_tab" data-toggle="tabajax" rel="tooltip"> Your Job Requests </a></li>
-      <li><a href="#" data-target="#ongoing" id="ongoing_tab" data-toggle="tabajax" rel="tooltip"> Ongoing Jobs </a></li>
-      <li><a href="#" data-target="#completed" id="completed_tab" data-toggle="tabajax" rel="tooltip"> Completed Jobs </a></li>
-</ul>
+    <ul class="nav nav-tabs tabs-up" id="friends">
+      <li class="active">
+        <a href="#" data-target="#requests" id="requests_tab" data-toggle="tabajax" rel="tooltip"> Your Job
+          Requests </a></li>
+      <li><a href="#" data-target="#ongoing" id="ongoing_tab" data-toggle="tabajax" rel="tooltip"> Ongoing Jobs </a>
+      </li>
+      <li>
+        <a href="#" data-target="#completed" id="completed_tab" data-toggle="tabajax" rel="tooltip"> Completed Jobs </a>
+      </li>
+    </ul>
 
-<div class="tab-content">
+    <div class="tab-content">
 
-  <div class="tab-pane fade-in active" id="requests">
+      <div class="tab-pane fade-in active" id="requests">
 
-    <% @job_requests.each do |job_request| %>
-      <div class="container col-md-3">
-        <%= render partial: job_request, layout: false %>
+        <% @job_requests.each do |job_request| %>
+            <div class="container col-md-3">
+              <%= render partial: job_request, layout: false %>
+            </div>
+        <% end %>
+
       </div>
-    <% end %>
+
+      <div class="tab-pane" id="ongoing">
+
+        <% @ongoing_jobs.each do |job| %>
+            <div class="container col-md-3">
+              <%= render partial: job, layout: false %>
+            </div>
+        <% end %>
+
+      </div>
+
+      <div class="tab-pane" id="completed">
+
+        <% @completed_jobs.each do |job| %>
+            <div class="container col-md-3">
+              <%= render partial: job, layout: false %>
+            </div>
+        <% end %>
+
+      </div>
+
+    </div>
 
   </div>
 
-  <div class="tab-pane" id="ongoing">
-
-    <% @ongoing_jobs.each do |job| %>
-      <div class="container col-md-3">
-        <%= render partial: job, layout: false %>
-      </div>
-    <% end %> 
-
+  <div class="row">
+    <%= link_to 'Create new Job Request', new_job_request_path, class: "btn btn-warning" %>
   </div>
-
-  <div class="tab-pane" id="completed">
-
-    <% @completed_jobs.each do |job| %>
-      <div class="container col-md-3">
-        <%= render partial: job, layout: false %>
-      </div>
-    <% end %>
-
-  </div>
-
-</div>
-
-</div>
-
-<div class="row">
-  <%= link_to 'Create new Job Request', new_job_request_path, class: "btn btn-warning" %>
-</div>
 
 
 </div>
 
 <script>
 
-    $('[data-toggle="tabajax"]').click(function(e) {
-        var $this = $(this)
-        $this.tab('show');
-        return false;
-    });
+  $('[data-toggle="tabajax"]').click(function (e) {
+    var $this = $(this);
+    $this.tab('show');
+    return false;
+  });
 
-  </script>
+</script>

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :job_requests
 
-####----Below is accepting job offer---
+  ####----Below is accepting job offer---
   resources :job_offers do
     member do
       post 'accept', to: 'job_offers#accept', as: 'accept'

@@ -1,7 +1,7 @@
-$(function(){
-  $("[name='toggle_read_status']").on('ajax:success', function(){
+$(function () {
+  $("[name='toggle_read_status']").on('ajax:success', function () {
     window.location.reload();
-  }).on('ajax:error', function(){
+  }).on('ajax:error', function () {
     alert('Error marking notification as read, please try again');
   });
 });

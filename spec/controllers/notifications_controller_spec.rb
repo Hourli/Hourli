@@ -83,7 +83,7 @@ RSpec.describe NotificationsController, type: :controller do
       end
 
       it "should return max of 5 unread notifications" do
-        7.times{
+        7.times {
           FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
         }
         xhr :get, :index, format: :js
@@ -94,7 +94,7 @@ RSpec.describe NotificationsController, type: :controller do
       end
 
       it "should return all unread notifications if less than 5 exist" do
-        3.times{
+        3.times {
           FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user)
         }
         xhr :get, :index, format: :js
@@ -182,7 +182,7 @@ RSpec.describe NotificationsController, type: :controller do
     context "multiple ids" do
       it "should toggle read status for multiple ids" do
         notifications = FactoryGirl.create_list(:notification, 3, read: false, user: @user, notification_for: 'customer')
-        ids = notifications.map {|notification| notification.id }
+        ids = notifications.map { |notification| notification.id }
         xhr :put, :toggle_read_status, id: ids
         assigns[:notifications].each { |notification|
           expect(notification.read).to be(true)
@@ -191,7 +191,7 @@ RSpec.describe NotificationsController, type: :controller do
 
       it "should return http success with multiple valid ids" do
         notifications = FactoryGirl.create_list(:notification, 3, read: false, user: @user, notification_for: 'customer')
-        ids = notifications.map {|notification| notification.id }
+        ids = notifications.map { |notification| notification.id }
         xhr :put, :toggle_read_status, id: ids
         expect(response).to have_http_status(:success)
       end
@@ -205,7 +205,7 @@ RSpec.describe NotificationsController, type: :controller do
 
       it "should update multiple read notifications to unread with valid ids" do
         notifications = FactoryGirl.create_list(:notification, 3, read: true, user: @user, notification_for: 'customer')
-        ids = notifications.map {|notification| notification.id }
+        ids = notifications.map { |notification| notification.id }
         notifications.each { |notification|
           expect(notification.read).to be(true)
         }
@@ -217,7 +217,7 @@ RSpec.describe NotificationsController, type: :controller do
 
       it "should update multiple unread notifications to read with valid ids" do
         notifications = FactoryGirl.create_list(:notification, 3, read: false, user: @user, notification_for: 'customer')
-        ids = notifications.map {|notification| notification.id }
+        ids = notifications.map { |notification| notification.id }
         notifications.each { |notification|
           expect(notification.read).to be(false)
         }
@@ -249,7 +249,7 @@ RSpec.describe NotificationsController, type: :controller do
         second_user.confirmed_at = Time.now
         second_user.save!
         notification_list = FactoryGirl.create_list(:notification, 4, read: true, notification_for: 'customer', user: second_user)
-        ids = notification_list.map {|notification| notification.id }
+        ids = notification_list.map { |notification| notification.id }
         notification_list.each { |notification|
           expect(notification.read).to be(true)
         }

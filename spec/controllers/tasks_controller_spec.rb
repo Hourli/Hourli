@@ -65,12 +65,12 @@ RSpec.describe TasksController, type: :controller do
     end
 
     it "validates presence of title" do
-      post :create, {job_id: @job.id, task: {title:''}}
+      post :create, {job_id: @job.id, task: {title: ''}}
       expect(response).to render_template(:new)
     end
 
     it "creates a new task" do
-      post :create, {job_id: @job.id, task: {title:'MyTitle', description: 'MyDescription', duration: 3, completed: false}}
+      post :create, {job_id: @job.id, task: {title: 'MyTitle', description: 'MyDescription', duration: 3, completed: false}}
       expect(flash[:notice]).to eq('MyTitle successfully created')
       expect(assigns[:task]).not_to be_nil
       expect(response).to redirect_to(edit_job_path(@job.id))

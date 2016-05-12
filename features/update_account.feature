@@ -1,4 +1,3 @@
-
 Feature: Update a user account
   As a user
   So that I can change my account info
@@ -6,8 +5,8 @@ Feature: Update a user account
 
   Background: The user exists in the database and we are logged in
     Given the following user exists:
-      | first_name | last_name | email | password | role |
-      | test | test | testuser@email.com | oldpass123 | customer |
+      | first_name | last_name | email              | password   | role     |
+      | test       | test      | testuser@email.com | oldpass123 | customer |
     And I am logged in with email "testuser@email.com" and password "oldpass123"
 
   Scenario: Successfully updating the account

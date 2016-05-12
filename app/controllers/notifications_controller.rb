@@ -61,7 +61,7 @@ class NotificationsController < ApplicationController
     if notification.nil? or notification.user.id != current_user.id
       status = :bad_request
     else
-      notification.hidden = ! notification.hidden
+      notification.hidden = !notification.hidden
       notification.save
     end
     redirect_to notifications_path, status: status

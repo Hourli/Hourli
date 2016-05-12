@@ -1,6 +1,6 @@
 Given /^the following job exists:$/ do |table|
-    table.hashes.each do |job|
-      Job.create!(name: job[:name], description: job[:description], location: job[:location], start_date: job[:start_date], end_date: job[:end_date], contractor: @user.contractor)
+  table.hashes.each do |job|
+    Job.create!(name: job[:name], description: job[:description], location: job[:location], start_date: job[:start_date], end_date: job[:end_date], contractor: @user.contractor)
   end
 end
 
@@ -9,11 +9,11 @@ Then /^the job name should be "([^"]*)"$/ do |arg1|
 end
 
 Then /^the job should be completed$/ do
-expect(page).to have_css('.fa-check-square')
+  expect(page).to have_css('.fa-check-square')
 end
 
 Then /^the job should not be completed$/ do
-expect(page).to have_css('.fa-times')
+  expect(page).to have_css('.fa-times')
 end
 
 Given /^the job named "([^"]*)" belongs to the current user's customer account$/ do |job_name|
@@ -40,6 +40,6 @@ And /^the job named "([^"]*)" should be under "([^"]*)"$/ do |job_name, tab_name
       assert_selector('#ongoing_jobs', text: job_name)
     when "Completed_Jobs"
       assert_selector('#completed_jobs', text: job_name)
-    
+
   end
 end

@@ -3,17 +3,17 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-         
+
   validates :first_name, :last_name, :role, presence: true
 
   has_one :customer
   has_one :contractor
   has_many :notifications
-  
+
   after_create :create_customer_contractor_or_both
-  
+
   private
-  
+
   def create_customer_contractor_or_both
     case self.role
       when "customer"
@@ -33,6 +33,6 @@ class User < ActiveRecord::Base
         self.customer = Customer.create()
         self.role = "customer"
         self.save
-      end
     end
+  end
 end

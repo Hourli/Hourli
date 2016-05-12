@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
 
-        <h1>Create job</h1>
+      <h1>Create job</h1>
 
 
-<%= bootstrap_form_for(@job, label_errors: true, url: jobs_path, method: :post) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.text_field :location %>
-  <%= f.date_field :start_date %>
-  <%= f.date_field :end_date %>
-  <%= f.submit "Create", id: "createjob", class: "btn btn-primary" %>
-<% end %>
+      <%= bootstrap_form_for(@job, label_errors: true, url: jobs_path, method: :post) do |f| %>
+          <%= f.text_field :name %>
+          <%= f.text_area :description %>
+          <%= f.text_field :location %>
+          <%= f.date_field :start_date %>
+          <%= f.date_field :end_date %>
+          <%= f.submit "Create", id: "createjob", class: "btn btn-primary" %>
+      <% end %>
 
-</div>
-</div>
+    </div>
+  </div>
 </div>
