@@ -18,7 +18,7 @@ def confirm_user_account
 
   @user.confirmed_at = Time.now
   @user.save!
-  if @other_user != nil 
+  if @other_user != nil
     @other_user.confirmed_at = Time.now
     @other_user.save!
   end
@@ -45,7 +45,7 @@ Given(/^there is another "([^"]*)" account$/) do |role|
   create_other_user_account(role)
 end
 
-Given(/^I am logged in$/)do
+Given(/^I am logged in$/) do
   create_confirmed_user_account
   login
 end

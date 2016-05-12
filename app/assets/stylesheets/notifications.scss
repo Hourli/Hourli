@@ -1,4 +1,4 @@
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width: 768px) {
   .animated {
     /*CSS transitions*/
     -o-transition-property: none !important;
@@ -22,16 +22,16 @@
 }
 
 .notification {
-  color:white;
+  color: white;
   background-color: red;
-  position:relative;
+  position: relative;
   padding: 3px 6px;
   border-radius: 20px;
   /*-webkit-animation-duration: 1s;*/
   /*-webkit-animation-iteration-count: 2;*/
 }
 
-.notification-bell{
+.notification-bell {
   top: -15px;
   left: -9px;
 }
@@ -44,24 +44,24 @@
   padding: 3px 6px;
 }
 
-.fa.fa-check{
+.fa.fa-check {
   color: dodgerblue;
 }
 
-.navbar-notification{
+.navbar-notification {
   margin-top: 5px;
 }
 
-.fit-notification-content{
+.fit-notification-content {
   overflow: auto;
 }
 
-.badge-customer{
+.badge-customer {
   @extend .badge;
   background: darkorange;
 }
 
-.badge-contractor{
+.badge-contractor {
   @extend .badge;
   background: steelblue;
 }

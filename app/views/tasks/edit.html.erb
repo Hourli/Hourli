@@ -9,13 +9,13 @@
           <%= f.text_area :description %>
           <%= f.number_field :duration, label: 'Duration (in minutes)' %>
           <%= f.form_group :completed do %>
-              <%= f.check_box :completed, label: "Check this box if the task is completed"%>
+              <%= f.check_box :completed, label: "Check this box if the task is completed" %>
           <% end %>
           <%= f.submit 'Update Task', class: 'btn btn-primary', id: 'update_task' %>
       <% end %>
 
       <br>
-      <%= link_to 'Delete Task', job_task_path(@job.id, @task.id), method: :delete, class: 'btn btn-xs btn-danger', id: 'delete_task', data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Delete Task', job_task_path(@job.id, @task.id), method: :delete, class: 'btn btn-xs btn-danger', id: 'delete_task', data: {confirm: 'Are you sure?'} %>
 
     </div>
   </div>

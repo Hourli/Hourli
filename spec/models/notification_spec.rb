@@ -12,10 +12,10 @@ RSpec.describe Notification, type: :model do
       @user_2.save!
 
       @user_1_unread_notifications = FactoryGirl.create_list(:notification, 4, read: false, notification_for: 'customer', user: @user_1)
-      @user_2_unread_notification =  FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user_2)
+      @user_2_unread_notification = FactoryGirl.create(:notification, read: false, notification_for: 'customer', user: @user_2)
 
       @user_1_read_notifications = FactoryGirl.create_list(:notification, 4, read: true, notification_for: 'customer', user: @user_1)
-      @user_2_read_notification =  FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user_2)
+      @user_2_read_notification = FactoryGirl.create(:notification, read: true, notification_for: 'customer', user: @user_2)
     end
 
     it "should fetch all unread notifications for the current user" do
@@ -50,21 +50,21 @@ RSpec.describe Notification, type: :model do
     end
 
     it "should validate the presence of message" do
-      expect {Notification.create!(user: @user_1, notification_for: 'customer')}.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: Message can't be blank")
+      expect { Notification.create!(user: @user_1, notification_for: 'customer') }.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: Message can't be blank")
     end
 
     it "should validate the presence of notification_for" do
-      expect {Notification.create!(user: @user_1, message: 'mymessage')}.to raise_exception(ActiveRecord::RecordInvalid)
+      expect { Notification.create!(user: @user_1, message: 'mymessage') }.to raise_exception(ActiveRecord::RecordInvalid)
     end
 
     it "should validate the presence of a user" do
-      expect {Notification.create!(message: 'mymessage', notification_for: 'customer')}.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: User can't be blank")
+      expect { Notification.create!(message: 'mymessage', notification_for: 'customer') }.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: User can't be blank")
     end
 
     it "should only allow 'customer' or 'contractor' for notification_for" do
       test_cases = ['fsadfsadfs', '!@#$%^&*()_', 'custome', 'ontractor', 'customera', '  customer']
       test_cases.each do |test_case|
-        expect{Notification.create!(user: @user_1, message: 'mymessage', notification_for: test_case)}.to raise_exception(ActiveRecord::RecordInvalid)
+        expect { Notification.create!(user: @user_1, message: 'mymessage', notification_for: test_case) }.to raise_exception(ActiveRecord::RecordInvalid)
       end
     end
   end

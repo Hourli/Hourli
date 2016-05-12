@@ -4,10 +4,10 @@
       <br>
       <h2 class="text-center">Resend confirmation instructions</h2>
       <br>
-      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-            <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: confirmation_path(resource_name), html: {method: :post}) do |f| %>
+          <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
 
-            <%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %>
+          <%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %>
       <% end %>
       <br>
       <%= render "users/shared/links" %>

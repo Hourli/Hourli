@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
-      <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
-        <br>
-        <h2 class="text-center">Edit Contractor</h2>
-        <br>
+    <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
+      <br>
+      <h2 class="text-center">Edit Contractor</h2>
+      <br>
 
-      <%= bootstrap_form_for(@contractor, label_errors: true, url: update_contractor_path, html: { method: :put }) do |f| %>
-        <%= f.text_field :occupation, :value => @contractor.occupation %>
-        <%= f.text_field :location, :value => @contractor.location %>
-        <%= f.text_area :summary, :value => @contractor.summary %>
-        <%= f.submit "Update", class: "btn btn-primary" %>
+      <%= bootstrap_form_for(@contractor, label_errors: true, url: update_contractor_path, html: {method: :put}) do |f| %>
+          <%= f.text_field :occupation, :value => @contractor.occupation %>
+          <%= f.text_field :location, :value => @contractor.location %>
+          <%= f.text_area :summary, :value => @contractor.summary %>
+          <%= f.submit "Update", class: "btn btn-primary" %>
       <% end %>
 
-      </div>
+    </div>
   </div>
 </div>

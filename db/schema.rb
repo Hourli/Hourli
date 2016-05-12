@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20160504221311) do
   create_table "contractors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
-    t.string   "occupation"
-    t.string   "location"
-    t.string   "summary"
+    t.integer "user_id"
+    t.string "occupation"
+    t.string "location"
+    t.string "summary"
   end
 
   add_index "contractors", ["user_id"], name: "index_contractors_on_user_id"
@@ -27,98 +27,98 @@ ActiveRecord::Schema.define(version: 20160504221311) do
   create_table "customers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.integer "user_id"
   end
 
   add_index "customers", ["user_id"], name: "index_customers_on_user_id"
 
   create_table "job_offers", force: :cascade do |t|
-    t.string   "title",          null: false
-    t.text     "description",    null: false
-    t.float    "hourly_rate",    null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "contractor_id",  null: false
-    t.integer  "job_request_id", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.float "hourly_rate", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "contractor_id", null: false
+    t.integer "job_request_id", null: false
   end
 
   add_index "job_offers", ["contractor_id"], name: "index_job_offers_on_contractor_id"
   add_index "job_offers", ["job_request_id"], name: "index_job_offers_on_job_request_id"
 
   create_table "job_requests", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.string   "location",    null: false
-    t.float    "hourly_rate", null: false
-    t.text     "categories",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "location", null: false
+    t.float "hourly_rate", null: false
+    t.text "categories", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.date "start_date"
+    t.date "end_date"
   end
 
   add_index "job_requests", ["customer_id"], name: "index_job_requests_on_customer_id"
 
   create_table "jobs", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.text     "location"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "contractor_id"
-    t.boolean  "completed",     default: false
-    t.integer  "customer_id"
+    t.string "name"
+    t.text "description"
+    t.text "location"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "contractor_id"
+    t.boolean "completed", default: false
+    t.integer "customer_id"
   end
 
   add_index "jobs", ["contractor_id"], name: "index_jobs_on_contractor_id"
 
   create_table "notifications", force: :cascade do |t|
-    t.string   "message",                          null: false
-    t.boolean  "read",             default: false, null: false
-    t.string   "notification_for",                 null: false
-    t.integer  "user_id",                          null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "hidden",           default: false
+    t.string "message", null: false
+    t.boolean "read", default: false, null: false
+    t.string "notification_for", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "title",                       null: false
-    t.string   "description"
-    t.boolean  "completed",   default: false
-    t.float    "duration"
-    t.integer  "job_id",                      null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string "title", null: false
+    t.string "description"
+    t.boolean "completed", default: false
+    t.float "duration"
+    t.integer "job_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "tasks", ["job_id"], name: "index_tasks_on_job_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "role"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

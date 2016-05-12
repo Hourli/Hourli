@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%=root_path %>">Hourli</a>
+      <a class="navbar-brand" href="<%= root_path %>">Hourli</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
       <ul class="nav navbar-nav navbar-right">
@@ -18,7 +18,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-user"></i>
                     </div>
-                    <%= email_field_tag :email, nil, class: "form-control input-sm", name: "user[email]", id: "user_email_navbar", placeholder: "Email", validate:true, required:true %>
+                    <%= email_field_tag :email, nil, class: "form-control input-sm", name: "user[email]", id: "user_email_navbar", placeholder: "Email", validate: true, required: true %>
                   </div>
                 </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-lock"></i>
                     </div>
-                    <%= password_field_tag :password, nil, class: "form-control input-sm", name: "user[password]", id: "user_password_navbar", placeholder: "Password", validate:true, required:true %>
+                    <%= password_field_tag :password, nil, class: "form-control input-sm", name: "user[password]", id: "user_password_navbar", placeholder: "Password", validate: true, required: true %>
                   </div>
                 </div>
                 <%= submit_tag "Login", id: "login_navbar", class: "btn btn-default btn-sm" %>
@@ -40,7 +40,9 @@
 
               <ul class="dropdown-menu navbar-dropdown" aria-labelledby="notification_dropdown">
                 <span id="notification_content"></span>
-                <li class="dropdown-header text-center"><a id="all_messages_link" class="all-messages" href="<%= notifications_path %>">View all messages</a></li>
+                <li class="dropdown-header text-center">
+                  <a id="all_messages_link" class="all-messages" href="<%= notifications_path %>">View all messages</a>
+                </li>
               </ul>
             </li>
 
@@ -52,22 +54,25 @@
               <ul class="dropdown-menu">
                 <% if current_user.customer and current_user.contractor %>
                     <li>
-                      <%= link_to change_role_path, remote: true, id: 'change_role_btn'  do %>
-                          <%= icon('refresh')%>&nbsp;Change role to&nbsp;<% if current_user.role == 'contractor' %>customer<% else %>contractor<% end %>
+                      <%= link_to change_role_path, remote: true, id: 'change_role_btn' do %>
+                          <%= icon('refresh') %>&nbsp;Change role to&nbsp;
+                          <% if current_user.role == 'contractor' %>customer
+                          <% else %>contractor
+                          <% end %>
                       <% end %>
                     </li>
                 <% end %>
                 <li>
                   <%= link_to edit_user_registration_path do %>
-                      <%= icon('cog')%>&nbsp;<%=current_user.email%>
+                      <%= icon('cog') %>&nbsp;<%= current_user.email %>
                   <% end %>
                 </li>
                 <% if current_user.role == "contractor" %>
-                  <li>
-                    <%= link_to edit_contractor_path do %>
-                      <%= icon('cog')%>&nbsp;Edit Contractor Profile
-                    <% end %>
-                  </li>
+                    <li>
+                      <%= link_to edit_contractor_path do %>
+                          <%= icon('cog') %>&nbsp;Edit Contractor Profile
+                      <% end %>
+                    </li>
                 <% end %>
                 <li class="divider"></li>
                 <li>

@@ -5,7 +5,7 @@
       <h2 class="text-center">Change your password</h2>
       <br>
 
-      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= bootstrap_form_for(resource, label_errors: true, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
           <%= f.hidden_field :reset_password_token %>
 
           <%= f.password_field :password, autofocus: true, autocomplete: "off", help: "(8 characters minumum)" %>
